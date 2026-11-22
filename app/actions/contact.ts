@@ -5,11 +5,8 @@ import { z } from "zod";
 
 import { sendContactEmail } from "@/lib/server/mailer";
 import { rateLimit } from "@/lib/server/rate-limit";
-import {
-  contactSchema,
-  type ContactField,
-  type ContactFormState,
-} from "@/lib/validation/contact";
+import { contactSchema } from "@/lib/validation/contact";
+import type { ContactField, ContactFormState } from "@/lib/validation/contact-state";
 
 const MIN_FILL_MS = 3_000;
 const MAX_FIELD_ECHO = 2_000;

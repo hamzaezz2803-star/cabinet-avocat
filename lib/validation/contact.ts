@@ -56,19 +56,3 @@ export const contactSchema = z.object({
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
-export type ContactField = keyof ContactInput;
-
-export interface ContactFormState {
-  status: "idle" | "success" | "error";
-  message: string;
-  fieldErrors: Partial<Record<ContactField, string>>;
-  /** Valeurs renvoyées pour remplir à nouveau le formulaire après une erreur. */
-  values: Partial<Record<Exclude<ContactField, "consent">, string>>;
-}
-
-export const initialContactState: ContactFormState = {
-  status: "idle",
-  message: "",
-  fieldErrors: {},
-  values: {},
-};

@@ -7,7 +7,7 @@ import { submitContact } from "@/app/actions/contact";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { contactTopics } from "@/lib/content";
-import { initialContactState, type ContactField } from "@/lib/validation/contact";
+import { initialContactState, type ContactField } from "@/lib/validation/contact-state";
 
 const fieldClass =
   "block w-full rounded-lg border border-input bg-card px-4 text-base text-foreground transition-colors duration-150 placeholder:text-muted-foreground/70 hover:border-foreground/40 focus-visible:border-brass aria-invalid:border-destructive";
