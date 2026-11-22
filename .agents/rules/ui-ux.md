@@ -41,6 +41,7 @@ Ordre de la page d'accueil : En-tête → Héros → Expertises → Le cabinet �
 
 Toute zone dynamique prévoit chargement, erreur et vide. Le site étant statique, seul le formulaire est concerné : `pending`, `error` (avec action « Réessayer » implicite : le formulaire reste rempli), `success`.
 
-## 7. Pages obligatoires
+## 7. Pages légales
 
-Mentions légales, politique de confidentialité, politique de cookies, conditions d'utilisation, toutes reliées depuis le pied de page. Page 404 sobre avec retour à l'accueil.
+Mentions légales et conditions d'utilisation, reliées depuis le pied de page. Pas de ligne de copyright.
+Politique de confidentialité et politique de cookies retirées à la demande du client (22 nov. 2026) : à rétablir avant la mise en production si la loi 09-08 / la CNDP l'exigent (le formulaire collecte des données personnelles). Toute URL inconnue affiche la 404 traduite (`app/[lang]/[...rest]`).
