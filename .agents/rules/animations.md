@@ -22,6 +22,7 @@ Le mouvement doit évoquer **la retenue** : rien ne rebondit, rien ne clignote. 
 | Entrée du titre mot par mot | Héros | 0,7 s par mot, décalage 0,06 s, `[0.22, 1, 0.36, 1]` |
 | Fondu + translation 12 px | Héros (accroche, texte, bouton) | 0,6 s, même courbe |
 | Défilement horizontal continu | Bandeau photo du héros | linéaire, 70 s par boucle, pause au survol, au focus et par bouton |
+| Voile WebGL (DarkVeil, React Bits) | Fond du héros uniquement | lent (`speed` 0,35), en pause hors écran et onglet masqué, figé si mouvement réduit |
 | Parallaxe | 2 photos maximum | translation ±8 % liée au défilement, pas de zoom |
 | Tracé de ligne | Frise « Méthode » | lié au défilement |
 | Survol | Liens, lignes d'expertise, boutons | 150 à 200 ms |

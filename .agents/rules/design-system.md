@@ -29,6 +29,7 @@ Définies **une seule fois** dans `app/globals.css` (variables CSS exposées à 
 | `--brass` | `#8C6D33` | Laiton : filets, icônes, focus. Jamais pour du texte courant |
 | `--brass-text` | `#6E5426` | Laiton lisible pour petits textes (6,4:1) |
 | `--brass-light` | `#C9A66B` | Laiton sur fond encre (7:1) |
+| `--forest` | `#0F2620` | Fond du héros (classe `.theme-hero`) : texte papier, bouton principal laiton clair, voile DarkVeil vert `#3F8C6E` |
 
 Statuts (toujours avec icône + libellé, jamais la couleur seule) :
 `--success #2E6B4A`, `--warning #8A5A00`, `--destructive #A1302A`, neutre = `muted-foreground`.
