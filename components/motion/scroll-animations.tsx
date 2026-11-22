@@ -114,7 +114,14 @@ export function ScrollAnimations() {
     });
     observer.observe(document.body);
 
+    // Les polices web changent la hauteur des textes : positions recalculées une fois chargées.
+    let alive = true;
+    document.fonts?.ready.then(() => {
+      if (alive) ScrollTrigger.refresh();
+    });
+
     return () => {
+      alive = false;
       observer.disconnect();
       cancelAnimationFrame(frame);
       mm.revert();
