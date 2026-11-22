@@ -20,6 +20,11 @@ import {
   type Locale,
 } from "@/lib/i18n/config";
 
+/** Mémorise le choix explicite de langue (cookie technique, lu par proxy.ts). */
+function rememberLocale(target: Locale) {
+  document.cookie = `${LOCALE_COOKIE}=${target}; path=/; max-age=31536000; samesite=lax`;
+}
+
 interface LanguageSwitcherProps {
   locale: Locale;
   label: string;
@@ -28,10 +33,6 @@ interface LanguageSwitcherProps {
 /** Sélecteur de langue : conserve la page courante et mémorise le choix (cookie technique). */
 export function LanguageSwitcher({ locale, label }: LanguageSwitcherProps) {
   const pathname = usePathname() ?? `/${locale}`;
-
-  const remember = (target: Locale) => {
-    document.cookie = `${LOCALE_COOKIE}=${target}; path=/; max-age=31536000; samesite=lax`;
-  };
 
   return (
     <DropdownMenu modal={false}>
@@ -49,7 +50,7 @@ export function LanguageSwitcher({ locale, label }: LanguageSwitcherProps) {
               hrefLang={target}
               lang={target}
               dir={localeDir(target)}
-              onClick={() => remember(target)}
+              onClick={() => rememberLocale(target)}
               aria-current={target === locale ? "true" : undefined}
               className="flex min-h-11 cursor-pointer items-center justify-between gap-4 text-base"
             >

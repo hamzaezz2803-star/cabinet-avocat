@@ -46,8 +46,6 @@ const naskh = Noto_Naskh_Arabic({
   preload: false,
 });
 
-export const dynamicParams = false;
-
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
