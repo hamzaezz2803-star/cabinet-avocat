@@ -35,9 +35,9 @@ export function ImageMarquee({ images, className, style }: ImageMarqueeProps) {
   ];
 
   return (
-    <div className={cn("relative w-full pb-10 md:pb-14", className)} style={style}>
+    <div className={cn("relative w-full pb-[clamp(0.5rem,2vh,1.5rem)]", className)} style={style}>
       <div
-        className="group overflow-hidden py-6 [mask-image:linear-gradient(to_right,transparent,#000_7%,#000_93%,transparent)]"
+        className="group overflow-hidden py-[clamp(0.75rem,2vh,1.5rem)] [mask-image:linear-gradient(to_right,transparent,#000_7%,#000_93%,transparent)]"
       >
         <ul
           aria-label="Photographies du cabinet et du monde juridique"
@@ -48,14 +48,14 @@ export function ImageMarquee({ images, className, style }: ImageMarqueeProps) {
             <li
               key={image.key}
               aria-hidden={image.decorative || undefined}
-              className="relative aspect-[3/4] h-48 shrink-0 overflow-hidden rounded-md bg-stone shadow-lift md:h-64"
+              className="relative aspect-[3/4] h-[clamp(7.5rem,21vh,16rem)] shrink-0 overflow-hidden rounded-md bg-stone shadow-lift"
               style={{ rotate: TILTS[index % TILTS.length] }}
             >
               <Image
                 src={image.src}
                 alt={image.decorative ? "" : image.alt}
                 fill
-                sizes="(min-width: 768px) 192px, 144px"
+                sizes="192px"
                 quality={70}
                 loading={image.decorative ? "lazy" : "eager"}
                 className="object-cover saturate-[0.85]"
@@ -65,19 +65,18 @@ export function ImageMarquee({ images, className, style }: ImageMarqueeProps) {
         </ul>
       </div>
 
-      <div className="container-site flex justify-end">
+      <div className="absolute right-3 bottom-1 md:right-6">
         <button
           type="button"
           onClick={() => setPaused((p) => !p)}
-          aria-pressed={paused}
-          className="inline-flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm text-muted-foreground transition-colors duration-150 hover:text-foreground"
+          aria-label={paused ? "Reprendre le défilement des photos" : "Mettre en pause le défilement des photos"}
+          className="inline-flex size-11 items-center justify-center rounded-lg border bg-background/90 text-muted-foreground shadow-lift transition-colors duration-150 hover:text-foreground"
         >
           {paused ? (
             <Play aria-hidden="true" className="size-4" strokeWidth={1.5} />
           ) : (
             <Pause aria-hidden="true" className="size-4" strokeWidth={1.5} />
           )}
-          {paused ? "Reprendre le défilement" : "Mettre en pause le défilement"}
         </button>
       </div>
     </div>

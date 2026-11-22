@@ -37,22 +37,23 @@ export interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "Cabinet d'Avocats",
-  monogram: "CA",
+  name: "Maître Fatna Sabour",
+  monogram: "FS",
   description:
-    "Conseil et défense juridique pour les entreprises et les particuliers : droit des affaires, contentieux, immobilier, travail, famille et pénal des affaires.",
+    "Cabinet de Maître Fatna Sabour, avocat à Casablanca : conseil et défense juridique pour les entreprises et les particuliers.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   locale: "fr_MA",
   bar: null,
   address: {
-    street: null,
+    street: "Espace Yousra, 7e étage, 355 (N° 93) boulevard Mohammed V",
     postalCode: null,
-    city: null,
+    city: "Casablanca",
     country: "Maroc",
   },
-  phone: null,
+  phone: "+212664559661",
   email: null,
-  hours: null,
+  /** D'après la fiche Google : ouverture à 8:00, fermé le dimanche. Horaires de fermeture à confirmer. */
+  hours: "À partir de 8:00, fermé le dimanche",
   legal: {
     legalForm: null,
     ice: null,

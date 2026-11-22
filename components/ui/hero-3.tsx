@@ -1,16 +1,16 @@
 import Link from "next/link";
-import type { ReactNode } from "react";
 
+import { HeroVeil } from "@/components/ui/hero-veil";
 import { Button } from "@/components/ui/button";
 import { ImageMarquee, type MarqueeImage } from "@/components/ui/image-marquee";
 import { cn } from "@/lib/utils";
 
 /**
  * Héros « marquee » inspiré du composant hero-3 (21st.dev), adapté aux règles du projet :
+ * - tient dans la hauteur de l'écran, bandeau photo compris (tailles en fonction de vh) ;
+ * - fond DarkVeil (React Bits) aux couleurs du cabinet ;
  * - entrée en CSS (visible sans JavaScript, sans retarder le LCP) ;
- * - bouton à rayon 8 px, couleurs issues des jetons ;
- * - bandeau photo dans le flux (aucun chevauchement du texte), pausable, `alt` descriptifs ;
- * - mouvement coupé si `prefers-reduced-motion`.
+ * - bandeau pausable, `alt` descriptifs, mouvement coupé si `prefers-reduced-motion`.
  */
 export interface AnimatedMarqueeHeroProps {
   tagline: string;
@@ -22,7 +22,6 @@ export interface AnimatedMarqueeHeroProps {
   secondaryHref?: string;
   images: MarqueeImage[];
   className?: string;
-  children?: ReactNode;
 }
 
 const STAGGER_MS = 55;
@@ -45,20 +44,22 @@ export function AnimatedMarqueeHero({
     <section
       aria-labelledby="hero-title"
       className={cn(
-        "relative flex min-h-[100svh] flex-col overflow-x-clip pt-(--header-height)",
+        "relative isolate flex h-svh min-h-[34rem] flex-col overflow-hidden pt-(--header-height)",
         className
       )}
     >
-      <div className="container-site flex flex-1 flex-col items-center justify-center py-14 text-center md:py-20">
+      <HeroVeil />
+
+      <div className="container-site flex min-h-0 flex-1 flex-col items-center justify-center py-[clamp(0.75rem,3vh,2.5rem)] text-center">
         <p className="flex animate-rise items-center gap-3 text-sm font-medium text-brass-text md:text-[0.9375rem]">
-          <span aria-hidden="true" className="hidden h-px w-8 bg-brass sm:block" />
+          <span aria-hidden="true" className="h-px w-8 bg-brass" />
           {tagline}
-          <span aria-hidden="true" className="hidden h-px w-8 bg-brass sm:block" />
+          <span aria-hidden="true" className="h-px w-8 bg-brass" />
         </p>
 
         <h1
           id="hero-title"
-          className="mt-6 max-w-[19ch] text-[2.625rem] leading-[1.04] tracking-[-0.01em] sm:text-6xl lg:text-[5.25rem] lg:leading-[1.02]"
+          className="mt-[clamp(0.75rem,2.2vh,1.5rem)] max-w-[19ch] text-[clamp(2.125rem,min(7.4vw,7.6vh),5.25rem)] leading-[1.03] tracking-[-0.01em]"
         >
           {words.map((word, i) => (
             <span
@@ -73,21 +74,21 @@ export function AnimatedMarqueeHero({
         </h1>
 
         <p
-          className="mt-7 max-w-[58ch] animate-rise text-lg leading-relaxed text-muted-foreground md:text-xl"
+          className="mt-[clamp(0.75rem,2.4vh,1.75rem)] max-w-[58ch] animate-rise text-base leading-relaxed text-muted-foreground md:text-lg"
           style={{ animationDelay: `${afterTitle}ms` }}
         >
           {description}
         </p>
 
         <div
-          className="mt-10 flex animate-rise flex-col items-center gap-4 sm:flex-row sm:gap-6"
+          className="mt-[clamp(1rem,3.4vh,2.5rem)] flex animate-rise items-center gap-6"
           style={{ animationDelay: `${afterTitle + 120}ms` }}
         >
           <Button asChild size="lg">
             <Link href={ctaHref}>{ctaText}</Link>
           </Button>
           {secondaryText && secondaryHref ? (
-            <Button asChild variant="link" size="lg">
+            <Button asChild variant="link" size="lg" className="hidden sm:inline-flex">
               <Link href={secondaryHref}>{secondaryText}</Link>
             </Button>
           ) : null}
@@ -96,7 +97,7 @@ export function AnimatedMarqueeHero({
 
       <ImageMarquee
         images={images}
-        className="animate-rise"
+        className="shrink-0 animate-rise"
         style={{ animationDelay: `${afterTitle + 240}ms` }}
       />
     </section>

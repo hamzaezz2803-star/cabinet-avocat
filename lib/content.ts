@@ -22,7 +22,7 @@ export interface HeroImage {
 }
 
 export const hero = {
-  tagline: "Conseil, négociation et défense devant les juridictions",
+  tagline: "Cabinet d'avocat à Casablanca",
   title: "Conseil et défense juridique pour les entreprises et les particuliers",
   description:
     "Nous analysons votre situation, vous présentons vos options et vous représentons devant les juridictions, avec la discrétion qu'impose le secret professionnel.",
