@@ -27,6 +27,7 @@ export const contactSchema = z.object({
     cleanLine,
     z
       .string({ error: "Indiquez votre adresse e-mail." })
+      .min(1, { error: "Indiquez votre adresse e-mail." })
       .max(254, { error: "Adresse e-mail trop longue." })
       .pipe(z.email({ error: "Adresse e-mail invalide, par exemple nom@domaine.ma." }))
   ),

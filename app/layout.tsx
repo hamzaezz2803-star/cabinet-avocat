@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} | Conseil et défense juridique`,
     description: siteConfig.description,
-    images: [{ url: "/images/library-busts.jpg", width: 2000, height: 1333, alt: "" }],
+    images: [{ url: "/images/library-busts.jpg", alt: "" }],
   },
   formatDetection: { telephone: false, email: false, address: false },
 };

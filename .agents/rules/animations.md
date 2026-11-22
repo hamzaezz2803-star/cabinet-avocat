@@ -6,8 +6,9 @@ Le mouvement doit évoquer **la retenue** : rien ne rebondit, rien ne clignote. 
 
 ## 2. Outils retenus
 
-- **Motion** (`motion/react`, successeur de Framer Motion, même API) : entrée du héros, bandeau photo, révélations au défilement, parallaxe légère, tracé de la frise « Méthode ».
-- **CSS** : survols, focus, accordéon (animations Radix), menu mobile (`tw-animate-css`).
+- **Motion** (`motion/react`, successeur de Framer Motion, même API) : parallaxe légère et tracé de la frise « Méthode », c'est-à-dire tout ce qui est lié au défilement.
+- **CSS** : entrée du héros (`animate-rise`, visible sans JavaScript et sans retarder le LCP), bandeau photo (`animate-marquee`, pausable), survols, focus, accordéon (animations Radix), menu mobile (`tw-animate-css`).
+- Pas de « révélation » de bloc au défilement : un contenu rendu à `opacity: 0` côté serveur reste invisible sans JavaScript, et l'effet répété sur chaque section est un cliché.
 
 Écartés, avec raison :
 - **GSAP / ScrollTrigger** : Motion couvre `useScroll` / `useTransform` / `whileInView` ; ajouter GSAP doublerait le poids JavaScript pour un même résultat. À reconsidérer seulement pour une séquence épinglée complexe.
@@ -20,8 +21,7 @@ Le mouvement doit évoquer **la retenue** : rien ne rebondit, rien ne clignote. 
 |---|---|---|
 | Entrée du titre mot par mot | Héros | 0,7 s par mot, décalage 0,06 s, `[0.22, 1, 0.36, 1]` |
 | Fondu + translation 12 px | Héros (accroche, texte, bouton) | 0,6 s, même courbe |
-| Défilement horizontal continu | Bandeau photo du héros | linéaire, 60 s par boucle, pause au survol |
-| Révélation de bloc | Titres de section uniquement | 0,6 s, une seule fois (`once: true`) |
+| Défilement horizontal continu | Bandeau photo du héros | linéaire, 70 s par boucle, pause au survol, au focus et par bouton |
 | Parallaxe | 2 photos maximum | translation ±8 % liée au défilement, pas de zoom |
 | Tracé de ligne | Frise « Méthode » | lié au défilement |
 | Survol | Liens, lignes d'expertise, boutons | 150 à 200 ms |
@@ -32,7 +32,7 @@ Interdits : animation sur chaque section, compteurs animés, texte qui tape, cur
 
 - `prefers-reduced-motion: reduce` : le bandeau photo s'arrête, la parallaxe est supprimée, les révélations deviennent instantanées. Implémentation : `useReducedMotion()` de Motion et `MotionConfig reducedMotion="user"` à la racine.
 - Le bandeau continu (plus de 5 s) se met en **pause au survol et au focus**, et un bouton « Mettre en pause le défilement » est disponible (WCAG 2.2.2).
-- Aucun contenu n'est invisible sans JavaScript : l'état initial masqué n'est appliqué que par Motion côté client après hydratation du héros.
+- Aucun contenu n'est invisible sans JavaScript : les entrées sont en CSS, Motion ne fait que déplacer des éléments déjà visibles.
 
 ## 5. Performance
 
