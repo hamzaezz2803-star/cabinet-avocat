@@ -9,22 +9,24 @@ interface LocationMapProps {
   query: string;
   label: string;
   address: string;
+  hl: string;
+  labels: { show: string; note: string; title: string };
 }
 
 /**
  * Carte Google Maps chargée uniquement au clic : aucune requête vers Google
  * (ni cookie tiers) tant que le visiteur ne l'a pas demandée.
  */
-export function LocationMap({ query, label, address }: LocationMapProps) {
+export function LocationMap({ query, label, address, hl, labels }: LocationMapProps) {
   const [loaded, setLoaded] = useState(false);
   // URL d'intégration finale de Google (évite la redirection de « ?output=embed »).
   const q = encodeURIComponent(query).replace(/%20/g, "+");
-  const src = `https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1s${q}!6i17!3m1!1sfr!5m1!1sfr`;
+  const src = `https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1s${q}!6i17!3m1!1s${hl}!5m1!1s${hl}`;
 
   if (loaded) {
     return (
       <iframe
-        title={`Carte : ${label}`}
+        title={labels.title}
         src={src}
         loading="lazy"
         referrerPolicy="strict-origin-when-cross-origin"
@@ -59,10 +61,10 @@ export function LocationMap({ query, label, address }: LocationMapProps) {
       <p className="relative mt-1 max-w-[34ch] text-sm text-muted-foreground">{address}</p>
 
       <Button variant="outline" className="relative mt-6" onClick={() => setLoaded(true)}>
-        Afficher la carte
+        {labels.show}
       </Button>
       <p className="relative mt-3 max-w-[40ch] text-sm leading-relaxed text-muted-foreground">
-        La carte est fournie par Google et ne se charge qu&apos;à votre demande.
+        {labels.note}
       </p>
     </div>
   );
