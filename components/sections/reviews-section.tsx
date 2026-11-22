@@ -64,7 +64,9 @@ function ReviewCard({
           {review.initial}
         </span>
         <div className="min-w-0 flex-1">
-          <p className="font-semibold">{review.author}</p>
+          <p className="font-semibold">
+            <bdi>{review.author}</bdi>
+          </p>
           <p className="flex flex-wrap items-center gap-x-1.5 text-sm text-muted-foreground">
             {review.localGuide ? (
               <>

@@ -52,3 +52,16 @@ Une dépendance n'est ajoutée que si elle évite plus de code qu'elle n'en appo
 - `npm run build` sans avertissement.
 - Console du navigateur vide en développement et en production.
 - Commits courts et descriptifs ; jamais de secret commité.
+
+## 6. Langues (fr, en, ar)
+
+- Routes sous `app/[lang]` (pré-rendues pour les 3 langues). `proxy.ts` ajoute le préfixe de langue (cookie `NEXT_LOCALE`, sinon `Accept-Language`, sinon `fr`).
+- Tous les textes visibles sont dans `lib/i18n/dictionaries/{fr,en,ar}.ts`. `fr.ts` définit le type `Dictionary` : une clé manquante en anglais ou en arabe casse la compilation.
+- Données non traduisibles (téléphone, e-mail, horaires, avis) : `lib/site-config.ts` ; champs traduits sous forme `{ fr, en, ar }`.
+- Les dictionnaires contiennent des fonctions : ne jamais les passer entiers à un composant client, seulement les chaînes utiles.
+- Arabe : `dir="rtl"` sur `<html>`, propriétés logiques uniquement (`ms-`, `pe-`, `start-`, `end-`, `text-start`, `border-s`), icônes directionnelles avec `rtl:rotate-180` ou `rtl:-scale-x-100`, numéros et e-mails dans `<bdi dir="ltr">`.
+
+## 7. Thème clair / sombre
+
+- Classe `dark` sur `<html>`, posée avant affichage par le script statique de `lib/theme.ts` (pas de dépendance, pas de flash). Préférence dans `localStorage`, sinon préférence système.
+- Les couleurs sombres sont des redéfinitions des mêmes rôles dans `.dark` (`app/globals.css`) : aucun composant ne code une couleur sombre en dur.

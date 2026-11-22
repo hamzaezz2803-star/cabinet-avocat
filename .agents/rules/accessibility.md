@@ -35,3 +35,9 @@ Points de rupture Tailwind : base 360 px, `sm` 640, `md` 768, `lg` 1024, `xl` 12
 - Ordre de lecture identique à l'ordre visuel ; pas de `order-*` qui inverse le sens du contenu.
 - Le héros ne chevauche jamais le bandeau photo, quelle que soit la hauteur d'écran (bandeau dans le flux, pas en `absolute`).
 - Zoom texte à 200 % sans perte de contenu.
+
+## 5. Langues et thème
+
+- `lang` et `dir` corrects sur `<html>` pour chaque langue ; citations dans une autre langue marquées `lang="fr"` / `dir="auto"`.
+- Tester chaque écran en arabe (RTL) et en mode sombre : contrastes AA vérifiés pour les deux thèmes.
+- Le sélecteur de langue affiche chaque langue dans sa propre écriture (Français, English, العربية).

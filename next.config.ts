@@ -56,6 +56,10 @@ const nextConfig: NextConfig = {
       },
     },
   },
+  // Les navigateurs demandent /favicon.ico par défaut : on sert l'icône SVG du cabinet.
+  async rewrites() {
+    return [{ source: "/favicon.ico", destination: "/icon.svg" }];
+  },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },

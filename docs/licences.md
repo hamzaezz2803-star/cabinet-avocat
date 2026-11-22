@@ -6,6 +6,8 @@
 |---|---|---|
 | Libre Caslon Display | Google Fonts (Impallari Type), auto-hébergée via `next/font` | SIL Open Font License 1.1 |
 | Public Sans | Google Fonts (USWDS), auto-hébergée via `next/font` | SIL Open Font License 1.1 |
+| IBM Plex Sans Arabic | Google Fonts (IBM), auto-hébergée via `next/font` (version arabe) | SIL Open Font License 1.1 |
+| Noto Naskh Arabic | Google Fonts (Google), auto-hébergée via `next/font` (titres en arabe) | SIL Open Font License 1.1 |
 
 ## Icônes
 
@@ -42,3 +44,6 @@ URL d'origine : `https://images.unsplash.com/<identifiant>`.
 | Radix UI | MIT |
 | Héros inspiré de « hero-3 » (21st.dev), réécrit | Code adapté, voir conditions de 21st.dev |
 | Motion | MIT |
+| Swiper (galerie) | MIT |
+| Galerie « Skiper 49 · Carousel_003 » (Skiper UI, @gurvinder-singh02, https://skiper-ui.com) | Gratuit pour usage commercial, **attribution à Skiper UI requise** (version gratuite) |
+| DarkVeil (React Bits, https://reactbits.dev) | MIT + Commons Clause (voir le dépôt React Bits) |
