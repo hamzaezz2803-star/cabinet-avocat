@@ -322,8 +322,7 @@ export const fr = {
     siteTitle: "Le site",
     legalTitle: "Informations légales",
     rights: "Tous droits réservés.",
-    ice: "ICE",
-    rc: "RC",
+    ids: (ice: string, rc: string) => `ICE : ${ice}. RC : ${rc}.`,
   },
   legal: {
     updated: "Dernière mise à jour : 22 nov. 2026",

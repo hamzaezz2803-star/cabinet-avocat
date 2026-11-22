@@ -288,8 +288,7 @@ export const ar: Dictionary = {
     siteTitle: "الموقع",
     legalTitle: "معلومات قانونية",
     rights: "جميع الحقوق محفوظة.",
-    ice: "التعريف الموحد للمقاولة",
-    rc: "السجل التجاري",
+    ids: (ice: string, rc: string) => `التعريف الموحد للمقاولة: ${ice}. السجل التجاري: ${rc}.`,
   },
   legal: {
     updated: "آخر تحديث: 22 نونبر 2026",

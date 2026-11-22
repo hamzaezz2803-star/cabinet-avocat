@@ -298,8 +298,7 @@ export const en: Dictionary = {
     siteTitle: "Site",
     legalTitle: "Legal information",
     rights: "All rights reserved.",
-    ice: "ICE",
-    rc: "Trade register",
+    ids: (ice: string, rc: string) => `ICE: ${ice}. Trade register: ${rc}.`,
   },
   legal: {
     updated: "Last updated: 22 Nov 2026",
