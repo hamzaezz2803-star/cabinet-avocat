@@ -43,7 +43,7 @@ URL d'origine : `https://images.unsplash.com/<identifiant>`.
 | shadcn/ui (Button, Sheet, Accordion) | MIT |
 | Radix UI | MIT |
 | Héros inspiré de « hero-3 » (21st.dev), réécrit | Code adapté, voir conditions de 21st.dev |
-| Motion | MIT |
+| GSAP + ScrollTrigger (animations au défilement) | Standard « no charge » licence GSAP : usage commercial gratuit (https://gsap.com/standard-license) |
 | Swiper (galerie) | MIT |
 | Galerie « Skiper 49 · Carousel_003 » (Skiper UI, @gurvinder-singh02, https://skiper-ui.com) | Gratuit pour usage commercial, **attribution à Skiper UI requise** (version gratuite) |
 | DarkVeil (React Bits, https://reactbits.dev) | MIT + Commons Clause (voir le dépôt React Bits) |

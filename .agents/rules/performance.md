@@ -22,7 +22,7 @@ Objectifs (mobile, 4G) : **LCP < 2,5 s**, **INP < 200 ms**, **CLS < 0,1**, Light
 
 ## 4. JavaScript
 
-- Importer Motion depuis `motion/react` ; utiliser `m` + `LazyMotion` si le poids devient un problème.
+- GSAP : importer uniquement `gsap` et `gsap/ScrollTrigger`, dans un seul composant client monté sur l'accueil.
 - Pas de bibliothèque pour ce que CSS sait faire (survols, transitions, `details`).
 - Vérifier la taille des bundles après chaque ajout de dépendance (`next build` affiche la taille des routes).
 

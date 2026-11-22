@@ -5,7 +5,7 @@
 - Next.js 16 (App Router, Turbopack, `cacheComponents`), React 19, TypeScript **strict**.
 - Tailwind CSS v4 (jetons dans `app/globals.css`, pas de `tailwind.config`).
 - shadcn/ui (base Radix) pour les primitives accessibles : `Button`, `Sheet`, `Accordion`.
-- Motion pour l'animation, zod pour la validation, Lucide pour les icônes.
+- GSAP + ScrollTrigger pour les animations au défilement, zod pour la validation, Lucide pour les icônes.
 
 Avant d'utiliser une API Next.js, lire le guide correspondant dans `node_modules/next/dist/docs/` (cette version diffère des versions connues : `proxy.ts` remplace `middleware.ts`, `preload` remplace `priority` sur `next/image`, `images.qualities` obligatoire...).
 

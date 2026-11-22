@@ -6,14 +6,22 @@ Le mouvement doit évoquer **la retenue** : rien ne rebondit, rien ne clignote. 
 
 ## 2. Outils retenus
 
-- **Motion** (`motion/react`, successeur de Framer Motion, même API) : parallaxe légère et tracé de la frise « Méthode », c'est-à-dire tout ce qui est lié au défilement.
-- **CSS** : entrée du héros (`animate-rise`, visible sans JavaScript et sans retarder le LCP), bandeau photo (`animate-marquee`, pausable), survols, focus, accordéon (animations Radix), menu mobile (`tw-animate-css`).
-- Pas de « révélation » de bloc au défilement : un contenu rendu à `opacity: 0` côté serveur reste invisible sans JavaScript, et l'effet répété sur chaque section est un cliché.
+- **GSAP + ScrollTrigger** (demande du client, 22 nov. 2026) : toutes les animations liées au défilement. Un seul pilote, `components/motion/scroll-animations.tsx`, monté sur l'accueil, qui lit des attributs :
+  - `data-reveal` : bloc qui monte et apparaît (titres de section, colonnes) ;
+  - `data-reveal-group` + `data-reveal-item` : cartes en cascade (expertises, avis, étapes, questions) ;
+  - `data-reveal-clip` : image révélée de bas en haut (portrait, statue, carte) ;
+  - `data-parallax="8"` + `data-parallax-inner` : parallaxe verticale ;
+  - `data-draw="x" | "y"` : frise « Méthode » tracée au défilement.
+- **CSS** : écran d'accueil, entrée du héros, bandeau photo, survols, accordéon, menu mobile.
+- Motion a été retiré : une seule bibliothèque d'animation au défilement.
 
-Écartés, avec raison :
-- **GSAP / ScrollTrigger** : Motion couvre `useScroll` / `useTransform` / `whileInView` ; ajouter GSAP doublerait le poids JavaScript pour un même résultat. À reconsidérer seulement pour une séquence épinglée complexe.
-- **Lenis** : le défilement « lissé » détourne la molette, gêne les lecteurs d'écran et la navigation clavier, et va à l'encontre de la sobriété voulue.
-- Aceternity / Magic UI : effets (spotlight, particules, meteors) trop démonstratifs pour un cabinet.
+Règles d'implémentation :
+- Le HTML rendu par le serveur est entièrement visible ; GSAP ne masque qu'après hydratation, et uniquement sous `prefers-reduced-motion: no-preference` (`gsap.matchMedia`).
+- Opacité seulement, jamais `visibility` / `autoAlpha` : les éléments restent atteignables au clavier.
+- Apparitions jouées une seule fois (`once: true`) ; parallaxe et frise en `scrub`.
+- Ne jamais imbriquer un `data-reveal` dans un `data-reveal-item` (double fondu).
+
+Écartés : Lenis (détourne la molette, gêne clavier et lecteurs d'écran), effets démonstratifs (Aceternity, Magic UI).
 
 ## 3. Catalogue autorisé
 
@@ -32,12 +40,12 @@ Interdits : animation sur chaque section, compteurs animés, texte qui tape, cur
 
 ## 4. Accessibilité du mouvement
 
-- `prefers-reduced-motion: reduce` : le bandeau photo s'arrête, la parallaxe est supprimée, les révélations deviennent instantanées. Implémentation : `useReducedMotion()` de Motion et `MotionConfig reducedMotion="user"` à la racine.
+- `prefers-reduced-motion: reduce` : le bandeau photo s'arrête, la parallaxe est supprimée, les révélations deviennent instantanées. Implémentation : `gsap.matchMedia("(prefers-reduced-motion: no-preference)")` dans le pilote GSAP, et règle CSS globale pour les animations CSS.
 - Le bandeau continu (plus de 5 s) se met en **pause au survol et au focus**, et un bouton « Mettre en pause le défilement » est disponible (WCAG 2.2.2).
-- Aucun contenu n'est invisible sans JavaScript : les entrées sont en CSS, Motion ne fait que déplacer des éléments déjà visibles.
+- Aucun contenu n'est invisible sans JavaScript : le serveur rend tout visible, GSAP n'agit qu'après hydratation.
 
 ## 5. Performance
 
 - Animer uniquement `transform` et `opacity`.
 - `will-change` seulement pendant l'animation.
-- Pas d'écouteur `scroll` manuel : `useScroll` de Motion.
+- Pas d'écouteur `scroll` manuel : ScrollTrigger (recalcul via `ScrollTrigger.refresh()` quand la hauteur de la page change).
