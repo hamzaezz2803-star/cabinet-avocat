@@ -26,11 +26,11 @@ export const heroPhotos: PhotoKey[] = photoKeys.slice(0, 10);
 /** Galerie : toutes les photos, dans un ordre différent du héros. */
 export const galleryPhotos: PhotoKey[] = [
   "library-busts",
-  "justice-statue",
+  "gavel",
   "courthouse-columns",
   "bookcase",
+  "justice-statue",
   "signing",
-  "gavel",
   "courthouse",
   "books-pen",
   "handshake",

@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
   LOCALE_COOKIE,
-  localeDir,
   localeNames,
   locales,
   switchLocalePath,
@@ -37,7 +36,7 @@ export function LanguageSwitcher({ locale, label }: LanguageSwitcherProps) {
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-1.5 px-2.5" aria-label={`${label} : ${localeNames[locale]}`}>
+        <Button variant="ghost" size="sm" className="gap-1.5 px-2.5" aria-label={`${label} (${localeNames[locale]})`}>
           <Globe aria-hidden="true" className="size-[1.125rem]" strokeWidth={1.5} />
           <span className="text-sm font-semibold uppercase">{locale}</span>
         </Button>
@@ -49,7 +48,6 @@ export function LanguageSwitcher({ locale, label }: LanguageSwitcherProps) {
               href={switchLocalePath(pathname, target)}
               hrefLang={target}
               lang={target}
-              dir={localeDir(target)}
               onClick={() => rememberLocale(target)}
               aria-current={target === locale ? "true" : undefined}
               className="flex min-h-11 cursor-pointer items-center justify-between gap-4 text-base"
