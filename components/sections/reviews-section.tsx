@@ -89,7 +89,7 @@ function ReviewCard({
           dir="auto"
           className="font-[family-name:var(--font-caslon)] text-2xl leading-snug"
         >
-          « {text} »
+          {t.showTranslation ? `“${text}”` : `« ${text} »`}
         </p>
       </blockquote>
 

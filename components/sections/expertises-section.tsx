@@ -54,7 +54,7 @@ export function ExpertisesSection({ t }: { t: Dictionary["expertises"] }) {
                 <h3 className="mt-8 text-[1.625rem] leading-tight">{item.title}</h3>
                 <p className="mt-3 text-muted-foreground">{item.summary}</p>
                 <ul
-                  aria-label={`${t.topicsLabel} : ${item.title}`}
+                  aria-label={t.topicsLabel}
                   className="mt-auto flex flex-wrap gap-2 pt-7"
                 >
                   {item.topics.map((topic) => (
