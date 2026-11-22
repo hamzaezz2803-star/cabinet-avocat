@@ -1,5 +1,5 @@
 import { SectionHeading } from "@/components/sections/section-heading";
-import { Carousel_003 } from "@/components/ui/skiper49";
+import { Carousel003Client } from "@/components/ui/skiper49-client";
 import { localeDir, type Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries/fr";
 import { galleryPhotos, photoKeys, photoSrc } from "@/lib/media";
@@ -27,7 +27,7 @@ export function GallerySection({ locale, t, alts }: GallerySectionProps) {
         <SectionHeading id="galerie-title" title={t.title} intro={t.intro} className="mx-auto" />
       </div>
       <div className="mx-auto mt-12 max-w-5xl px-5 lg:mt-16">
-        <Carousel_003
+        <Carousel003Client
           images={images}
           dir={localeDir(locale)}
           labels={{ prev: t.prev, next: t.next, slide: t.slide }}
