@@ -166,7 +166,8 @@ export const en: Dictionary = {
     note: "Illustrative photographs.",
     prev: "Previous photo",
     next: "Next photo",
-    slide: (i: number, total: number) => `Photo ${i} of ${total}`,
+    /** Modèle Swiper A11y. */
+    slide: "Photo {{index}} of {{slidesLength}}",
   },
   method: {
     title: "How your case is handled",

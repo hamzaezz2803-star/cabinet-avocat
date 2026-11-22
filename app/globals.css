@@ -240,6 +240,30 @@ html[lang="ar"] {
   }
 }
 
+/* Galerie Skiper49 (Swiper) */
+.skiper49-swiper {
+  width: 100%;
+  padding-block: 1rem 3.25rem !important;
+}
+.skiper49-swiper .swiper-slide {
+  width: clamp(14rem, 62vw, 20rem);
+  aspect-ratio: 4 / 5;
+}
+.skiper49-swiper .swiper-pagination-bullet {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--foreground);
+  opacity: 0.25;
+}
+.skiper49-swiper .swiper-pagination-bullet-active {
+  background-color: var(--brass);
+  opacity: 1;
+}
+.skiper49-swiper .swiper-slide:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 4px;
+}
+
 /* Arabe : pas d'interlettrage négatif, interlignage plus ample pour les titres. */
 [dir="rtl"] :is(h1, h2, h3, .font-heading) {
   letter-spacing: 0 !important;

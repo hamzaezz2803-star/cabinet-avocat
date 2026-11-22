@@ -189,7 +189,8 @@ export const fr = {
     note: "Photographies d'illustration.",
     prev: "Photo précédente",
     next: "Photo suivante",
-    slide: (i: number, total: number) => `Photo ${i} sur ${total}`,
+    /** Modèle Swiper A11y. */
+    slide: "Photo {{index}} sur {{slidesLength}}",
   },
   method: {
     title: "Comment se déroule votre dossier",

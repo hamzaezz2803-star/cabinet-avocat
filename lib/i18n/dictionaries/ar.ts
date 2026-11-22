@@ -159,7 +159,8 @@ export const ar: Dictionary = {
     note: "صور توضيحية.",
     prev: "الصورة السابقة",
     next: "الصورة التالية",
-    slide: (i: number, total: number) => `الصورة ${i} من ${total}`,
+    /** Modèle Swiper A11y. */
+    slide: "الصورة {{index}} من {{slidesLength}}",
   },
   method: {
     title: "كيف يُدار ملفكم",
