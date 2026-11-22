@@ -7,6 +7,7 @@ import {
 } from "next/font/google";
 import { notFound } from "next/navigation";
 
+import { InlineScript } from "@/components/inline-script";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { hasLocale, localeDir, locales, ogLocale } from "@/lib/i18n/config";
@@ -91,7 +92,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
     <html lang={lang} dir={localeDir(lang)} className={`${fonts} antialiased`} suppressHydrationWarning>
       <head>
         {/* Thème avant affichage (pas de flash). Script statique, voir lib/theme.ts. */}
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <InlineScript html={themeInitScript} />
       </head>
       <body className="flex min-h-svh flex-col">
           <a
