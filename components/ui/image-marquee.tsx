@@ -13,6 +13,7 @@ export interface MarqueeImage {
 
 interface ImageMarqueeProps {
   images: MarqueeImage[];
+  labels: { list: string; pause: string; play: string };
   className?: string;
   style?: CSSProperties;
 }
@@ -24,7 +25,7 @@ const TILTS = ["-2deg", "2.5deg", "-1deg", "1.5deg"];
  * Animation CSS (transform uniquement), en pause au survol, au focus
  * et via un bouton (WCAG 2.2.2). Arrêtée par `prefers-reduced-motion`.
  */
-export function ImageMarquee({ images, className, style }: ImageMarqueeProps) {
+export function ImageMarquee({ images, labels, className, style }: ImageMarqueeProps) {
   const [paused, setPaused] = useState(false);
 
   // Première copie décorative, seconde copie annoncée : la piste part de -50 %,
@@ -35,12 +36,13 @@ export function ImageMarquee({ images, className, style }: ImageMarqueeProps) {
   ];
 
   return (
-    <div className={cn("relative w-full pb-[clamp(0.5rem,2vh,1.5rem)]", className)} style={style}>
+    // Bandeau décoratif : toujours de gauche à droite, quelle que soit la langue.
+    <div dir="ltr" className={cn("relative w-full pb-[clamp(0.5rem,2vh,1.5rem)]", className)} style={style}>
       <div
         className="group overflow-hidden py-[clamp(0.75rem,2vh,1.5rem)] [mask-image:linear-gradient(to_right,transparent,#000_7%,#000_93%,transparent)]"
       >
         <ul
-          aria-label="Photographies du cabinet et du monde juridique"
+          aria-label={labels.list}
           className="flex w-max animate-marquee gap-5 group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused] md:gap-7"
           style={{ animationPlayState: paused ? "paused" : undefined }}
         >
@@ -69,7 +71,7 @@ export function ImageMarquee({ images, className, style }: ImageMarqueeProps) {
         <button
           type="button"
           onClick={() => setPaused((p) => !p)}
-          aria-label={paused ? "Reprendre le défilement des photos" : "Mettre en pause le défilement des photos"}
+          aria-label={paused ? labels.play : labels.pause}
           className="inline-flex size-11 items-center justify-center rounded-lg border bg-background/90 text-muted-foreground shadow-lift transition-colors duration-150 hover:text-foreground"
         >
           {paused ? (

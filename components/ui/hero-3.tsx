@@ -21,6 +21,7 @@ export interface AnimatedMarqueeHeroProps {
   secondaryText?: string;
   secondaryHref?: string;
   images: MarqueeImage[];
+  marqueeLabels: { list: string; pause: string; play: string };
   className?: string;
 }
 
@@ -35,6 +36,7 @@ export function AnimatedMarqueeHero({
   secondaryText,
   secondaryHref,
   images,
+  marqueeLabels,
   className,
 }: AnimatedMarqueeHeroProps) {
   const words = title.split(" ");
@@ -97,6 +99,7 @@ export function AnimatedMarqueeHero({
 
       <ImageMarquee
         images={images}
+        labels={marqueeLabels}
         className="shrink-0 animate-rise"
         style={{ animationDelay: `${afterTitle + 240}ms` }}
       />
