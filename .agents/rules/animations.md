@@ -19,6 +19,7 @@ Le mouvement doit évoquer **la retenue** : rien ne rebondit, rien ne clignote. 
 
 | Effet | Où | Durée / courbe |
 |---|---|---|
+| Écran d'accueil (balance de la Justice) | Premier chargement de la session uniquement | tracé 0,75 s, oscillation 1,1 s, disparition à 1,45 s (total ~1,9 s), CSS pur, absent si mouvement réduit, n'intercepte pas les clics |
 | Entrée du titre mot par mot | Héros | 0,7 s par mot, décalage 0,06 s, `[0.22, 1, 0.36, 1]` |
 | Fondu + translation 12 px | Héros (accroche, texte, bouton) | 0,6 s, même courbe |
 | Défilement horizontal continu | Bandeau photo du héros | linéaire, 70 s par boucle, pause au survol, au focus et par bouton |
