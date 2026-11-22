@@ -187,3 +187,8 @@ export const contact = {
   warning:
     "N'indiquez pas de détails confidentiels et n'envoyez pas de pièces par ce formulaire : elles vous seront demandées lors du rendez-vous.",
 };
+
+export const contactTopics = [
+  ...expertises.map((e) => ({ value: e.id, label: e.title })),
+  { value: "autre", label: "Autre sujet" },
+];
