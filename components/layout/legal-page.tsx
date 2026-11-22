@@ -2,7 +2,7 @@ import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary, LegalFacts, LegalSection } from "@/lib/i18n/dictionaries/fr";
 import { formatPhoneMa, fullAddress, siteConfig } from "@/lib/site-config";
 
-export type LegalKey = "mentions" | "privacy" | "cookies" | "terms";
+export type LegalKey = "mentions" | "terms";
 
 /** Faits du cabinet injectés dans les textes légaux (jamais inventés : null → « à compléter »). */
 export function legalFacts(locale: Locale): LegalFacts {

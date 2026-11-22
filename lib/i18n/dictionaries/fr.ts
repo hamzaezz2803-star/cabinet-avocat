@@ -290,9 +290,7 @@ export const fr = {
       otherTopic: "Autre sujet",
       message: "Votre demande",
       messageHint: "Quelques lignes suffisent : la nature du problème et son urgence éventuelle.",
-      consentBefore:
-        "J'accepte que mes informations soient utilisées par le cabinet pour répondre à ma demande, conformément à la",
-      consentLink: "politique de confidentialité",
+      consentLabel: "J'accepte que le cabinet utilise mes informations uniquement pour répondre à ma demande.",
       submit: "Envoyer ma demande",
       sending: "Envoi en cours",
       honeypot: "Ne pas remplir ce champ",
@@ -322,7 +320,6 @@ export const fr = {
     contactTitle: "Coordonnées",
     siteTitle: "Le site",
     legalTitle: "Informations légales",
-    rights: "Tous droits réservés.",
     ids: (ice: string, rc: string) => `ICE : ${ice}. RC : ${rc}.`,
   },
   legal: {
@@ -331,8 +328,6 @@ export const fr = {
       "Document provisoire : les mentions « à compléter » doivent être renseignées par le cabinet, et le texte relu par un juriste avant la mise en ligne.",
     links: {
       mentions: "Mentions légales",
-      privacy: "Politique de confidentialité",
-      cookies: "Politique de cookies",
       terms: "Conditions d'utilisation",
     },
     mentions: {
@@ -363,86 +358,6 @@ export const fr = {
           heading: "Propriété intellectuelle",
           paragraphs: [
             "Les textes et la présentation du site appartiennent au cabinet. Les photographies sont des illustrations utilisées sous licence Unsplash.",
-          ],
-        },
-      ],
-    },
-    privacy: {
-      description: "Comment le cabinet traite les données transmises par le formulaire de contact.",
-      sections: (f: LegalFacts): LegalSection[] => [
-        {
-          heading: "Cadre",
-          paragraphs: [
-            "Cette politique décrit les données collectées par ce site et leur utilisation, conformément à la loi n° 09-08 relative à la protection des personnes physiques à l'égard du traitement des données à caractère personnel.",
-          ],
-        },
-        {
-          heading: "Responsable du traitement",
-          paragraphs: [`${f.name}, ${f.email}. Numéro de déclaration ou d'autorisation CNDP : ${TC}.`],
-        },
-        {
-          heading: "Données collectées",
-          paragraphs: ["Le site ne collecte des données que lorsque vous envoyez le formulaire de contact :"],
-          list: [
-            "nom et prénom ;",
-            "adresse e-mail ;",
-            "numéro de téléphone, si vous choisissez de l'indiquer ;",
-            "domaine concerné et message.",
-          ],
-        },
-        {
-          heading: "Finalité et base légale",
-          paragraphs: [
-            "Ces données servent uniquement à répondre à votre demande et à organiser un éventuel rendez-vous. Le traitement repose sur votre consentement, exprimé en cochant la case prévue. Aucune prospection commerciale n'est réalisée.",
-          ],
-        },
-        {
-          heading: "Destinataires et sous-traitants",
-          list: [
-            "L'avocat et ses collaborateurs chargés de répondre.",
-            `Hébergeur du site : ${f.host ?? TC}.`,
-            `Service d'envoi d'e-mails : ${TC}.`,
-          ],
-        },
-        {
-          heading: "Durée de conservation",
-          paragraphs: [
-            `Le site ne stocke pas les demandes : elles sont transmises par e-mail au cabinet. Sans suite donnée, elles sont supprimées au bout de ${TC}. Si un dossier est ouvert, les règles de conservation propres à la profession s'appliquent.`,
-          ],
-        },
-        {
-          heading: "Vos droits",
-          paragraphs: [
-            `Vous disposez d'un droit d'accès, de rectification, d'opposition et de suppression. Pour l'exercer, écrivez à ${f.email}. Vous pouvez également saisir la Commission nationale de contrôle de la protection des données à caractère personnel (CNDP).`,
-          ],
-        },
-        {
-          heading: "Sécurité",
-          paragraphs: [
-            "Le site est servi exclusivement en HTTPS. Les données du formulaire sont validées par le serveur et ne figurent dans aucun journal technique.",
-          ],
-        },
-      ],
-    },
-    cookies: {
-      description: "Le site n'utilise aucun cookie de mesure d'audience ni de publicité.",
-      sections: (): LegalSection[] => [
-        {
-          heading: "Aucun cookie de suivi",
-          paragraphs: [
-            "Ce site n'utilise aucun cookie de mesure d'audience, de publicité ou de réseau social. C'est pourquoi aucun bandeau de consentement ne vous est présenté.",
-          ],
-        },
-        {
-          heading: "Préférences enregistrées",
-          paragraphs: [
-            "Votre choix de langue est conservé dans un cookie technique (NEXT_LOCALE) et votre choix de thème clair ou sombre dans le stockage local de votre navigateur. Ils servent uniquement à afficher le site comme vous l'avez choisi.",
-          ],
-        },
-        {
-          heading: "Ressources tierces",
-          paragraphs: [
-            "Les polices et les images sont servies directement par le site. Seule exception : la carte de la section « Accès » est fournie par Google Maps et ne se charge que si vous cliquez sur « Afficher la carte ». Google peut alors déposer ses propres cookies, selon sa politique de confidentialité. Les liens d'itinéraire ouvrent Google Maps ou Waze dans un nouvel onglet.",
           ],
         },
       ],

@@ -216,11 +216,7 @@ export function ContactForm({ locale, t, topics }: ContactFormProps) {
               className="mt-0.5 size-5 shrink-0 cursor-pointer rounded-sm border-input accent-primary"
             />
             <label htmlFor="consent" className="cursor-pointer text-[0.9375rem] leading-relaxed text-muted-foreground">
-              {t.consentBefore}{" "}
-              <a href={`/${locale}/confidentialite`} className="text-foreground underline decoration-brass underline-offset-4">
-                {t.consentLink}
-              </a>
-              .
+              {t.consentLabel}
             </label>
           </div>
           {err.consent ? (

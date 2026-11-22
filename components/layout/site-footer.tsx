@@ -11,18 +11,11 @@ interface SiteFooterProps {
   dict: Dictionary;
 }
 
-async function CopyrightYear() {
-  "use cache";
-  return <>{new Date().getFullYear()}</>;
-}
-
 export function SiteFooter({ locale, dict }: SiteFooterProps) {
   const { address, phone, email, legal } = siteConfig;
   const t = dict.footer;
   const legalLinks = [
     { label: dict.legal.links.mentions, href: `/${locale}/mentions-legales` },
-    { label: dict.legal.links.privacy, href: `/${locale}/confidentialite` },
-    { label: dict.legal.links.cookies, href: `/${locale}/cookies` },
     { label: dict.legal.links.terms, href: `/${locale}/conditions-utilisation` },
   ];
   const linkClass = "inline-flex min-h-11 items-center text-muted-foreground hover:text-foreground";
@@ -84,9 +77,6 @@ export function SiteFooter({ locale, dict }: SiteFooterProps) {
 
       <div className="border-t">
         <div className="container-site flex flex-col gap-2 py-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
-          <p>
-            © <CopyrightYear /> {siteConfig.name[locale]}. {t.rights}
-          </p>
           <p>{t.ids(legal.ice ?? dict.common.toComplete, legal.rc ?? dict.common.toComplete)}</p>
         </div>
       </div>

@@ -267,9 +267,7 @@ export const en: Dictionary = {
       otherTopic: "Other matter",
       message: "Your request",
       messageHint: "A few lines are enough: what the issue is and how urgent it is.",
-      consentBefore:
-        "I agree that the office may use my information to answer my request, in accordance with the",
-      consentLink: "privacy policy",
+      consentLabel: "I agree that the office may use my information solely to answer my request.",
       submit: "Send my request",
       sending: "Sending",
       honeypot: "Leave this field empty",
@@ -298,7 +296,6 @@ export const en: Dictionary = {
     contactTitle: "Contact details",
     siteTitle: "Site",
     legalTitle: "Legal information",
-    rights: "All rights reserved.",
     ids: (ice: string, rc: string) => `ICE: ${ice}. Trade register: ${rc}.`,
   },
   legal: {
@@ -307,8 +304,6 @@ export const en: Dictionary = {
       "Draft document: items marked “to be completed” must be filled in by the office, and the text reviewed by a legal professional before publication.",
     links: {
       mentions: "Legal notice",
-      privacy: "Privacy policy",
-      cookies: "Cookie policy",
       terms: "Terms of use",
     },
     mentions: {
@@ -339,86 +334,6 @@ export const en: Dictionary = {
           heading: "Intellectual property",
           paragraphs: [
             "The texts and design of this site belong to the office. The photographs are illustrations used under the Unsplash licence.",
-          ],
-        },
-      ],
-    },
-    privacy: {
-      description: "How the office handles the data sent through the contact form.",
-      sections: (f: LegalFacts): LegalSection[] => [
-        {
-          heading: "Scope",
-          paragraphs: [
-            "This policy describes the data collected by this site and how it is used, in accordance with Moroccan Law No. 09-08 on the protection of individuals with regard to the processing of personal data.",
-          ],
-        },
-        {
-          heading: "Data controller",
-          paragraphs: [`${f.name}, ${f.email}. CNDP declaration or authorisation number: ${TC}.`],
-        },
-        {
-          heading: "Data collected",
-          paragraphs: ["The site only collects data when you send the contact form:"],
-          list: [
-            "full name;",
-            "email address;",
-            "phone number, if you choose to provide it;",
-            "area of law and message.",
-          ],
-        },
-        {
-          heading: "Purpose and legal basis",
-          paragraphs: [
-            "This data is used only to answer your request and arrange a possible meeting. Processing is based on your consent, given by ticking the box provided. No marketing is carried out.",
-          ],
-        },
-        {
-          heading: "Recipients and processors",
-          list: [
-            "The lawyer and the staff responsible for answering.",
-            `Website hosting provider: ${f.host ?? TC}.`,
-            `Email delivery service: ${TC}.`,
-          ],
-        },
-        {
-          heading: "Retention",
-          paragraphs: [
-            `The site does not store requests: they are sent to the office by email. If no follow-up is needed, they are deleted after ${TC}. If a case is opened, the retention rules of the profession apply.`,
-          ],
-        },
-        {
-          heading: "Your rights",
-          paragraphs: [
-            `You have the right to access, correct, object to and delete your data. To exercise it, write to ${f.email}. You may also contact the Moroccan data protection authority (CNDP).`,
-          ],
-        },
-        {
-          heading: "Security",
-          paragraphs: [
-            "The site is served over HTTPS only. Form data is validated by the server and never appears in technical logs.",
-          ],
-        },
-      ],
-    },
-    cookies: {
-      description: "This site uses no analytics or advertising cookies.",
-      sections: (): LegalSection[] => [
-        {
-          heading: "No tracking cookies",
-          paragraphs: [
-            "This site uses no analytics, advertising or social media cookies. That is why no consent banner is shown.",
-          ],
-        },
-        {
-          heading: "Saved preferences",
-          paragraphs: [
-            "Your language choice is kept in a technical cookie (NEXT_LOCALE) and your light or dark theme choice in your browser's local storage. They are only used to display the site the way you chose.",
-          ],
-        },
-        {
-          heading: "Third-party resources",
-          paragraphs: [
-            "Fonts and images are served by the site itself. The only exception is the map in the “Location” section, provided by Google Maps, which only loads if you click “Show the map”. Google may then set its own cookies under its privacy policy. Direction links open Google Maps or Waze in a new tab.",
           ],
         },
       ],
