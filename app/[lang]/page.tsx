@@ -1,44 +1,48 @@
+import { notFound } from "next/navigation";
+
+import { AboutSection } from "@/components/sections/about-section";
 import { ConfidentialityBand } from "@/components/sections/confidentiality-band";
 import { ContactSection } from "@/components/sections/contact-section";
 import { ExpertisesSection } from "@/components/sections/expertises-section";
 import { FaqSection } from "@/components/sections/faq-section";
 import { FirmSection } from "@/components/sections/firm-section";
+import { GallerySection } from "@/components/sections/gallery-section";
 import { LocationSection } from "@/components/sections/location-section";
 import { MethodSection } from "@/components/sections/method-section";
 import { ReviewsSection } from "@/components/sections/reviews-section";
 import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
-import { expertises, faqs, hero } from "@/lib/content";
+import { hasLocale, type Locale } from "@/lib/i18n/config";
+import { getDictionary, type Dictionary } from "@/lib/i18n/get-dictionary";
+import { heroPhotos, photoKeys, photoSrc } from "@/lib/media";
 import { siteConfig } from "@/lib/site-config";
 
-/** Données structurées (schema.org). Sérialisées depuis la configuration, `<` échappé. */
-function JsonLd() {
+/** Données structurées (schema.org), sérialisées depuis la configuration, `<` échappé. */
+function JsonLd({ locale, dict }: { locale: Locale; dict: Dictionary }) {
+  const { address } = siteConfig;
   const data = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "LegalService",
-        name: siteConfig.name,
-        description: siteConfig.description,
-        url: siteConfig.url,
+        name: siteConfig.name[locale],
+        description: dict.meta.description,
+        url: `${siteConfig.url}/${locale}`,
+        inLanguage: locale,
+        telephone: siteConfig.phone,
+        email: siteConfig.email,
         areaServed: "MA",
-        knowsAbout: expertises.map((e) => e.title),
-        ...(siteConfig.phone ? { telephone: siteConfig.phone } : {}),
-        ...(siteConfig.email ? { email: siteConfig.email } : {}),
-        ...(siteConfig.address.city
-          ? {
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: siteConfig.address.street ?? undefined,
-                postalCode: siteConfig.address.postalCode ?? undefined,
-                addressLocality: siteConfig.address.city,
-                addressCountry: "MA",
-              },
-            }
-          : {}),
+        knowsAbout: dict.expertises.items.map((e) => e.title),
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: address.street[locale],
+          postalCode: address.postalCode,
+          addressLocality: address.city[locale],
+          addressCountry: "MA",
+        },
       },
       {
         "@type": "FAQPage",
-        mainEntity: faqs.map((f) => ({
+        mainEntity: dict.faq.items.map((f) => ({
           "@type": "Question",
           name: f.question,
           acceptedAnswer: { "@type": "Answer", text: f.answer },
@@ -56,28 +60,40 @@ function JsonLd() {
   );
 }
 
-export default function HomePage() {
+export default async function HomePage({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!hasLocale(lang)) notFound();
+  const dict = getDictionary(lang);
+
+  const heroImages = heroPhotos.map((key) => ({
+    src: photoSrc(key),
+    alt: dict.media.alts[photoKeys.indexOf(key)] ?? "",
+  }));
+
   return (
     <>
-      <JsonLd />
+      <JsonLd locale={lang} dict={dict} />
       <AnimatedMarqueeHero
-        tagline={hero.tagline}
-        title={hero.title}
-        description={hero.description}
-        ctaText={hero.ctaText}
-        ctaHref="/#contact"
-        secondaryText={hero.secondaryText}
-        secondaryHref="/#expertises"
-        images={hero.images}
+        tagline={dict.hero.tagline}
+        title={dict.hero.title}
+        description={dict.hero.description}
+        ctaText={dict.hero.cta}
+        ctaHref={`/${lang}#contact`}
+        secondaryText={dict.hero.secondary}
+        secondaryHref={`/${lang}#expertises`}
+        images={heroImages}
+        marqueeLabels={{ list: dict.media.marqueeLabel, pause: dict.media.pause, play: dict.media.play }}
       />
-      <ExpertisesSection />
-      <FirmSection />
-      <ReviewsSection />
-      <MethodSection />
-      <ConfidentialityBand />
-      <FaqSection />
-      <LocationSection />
-      <ContactSection />
+      <AboutSection locale={lang} t={dict.about} />
+      <ExpertisesSection t={dict.expertises} />
+      <FirmSection t={dict.firm} />
+      <ReviewsSection locale={lang} t={dict.reviews} />
+      <MethodSection t={dict.method} />
+      <GallerySection locale={lang} t={dict.gallery} alts={dict.media.alts} />
+      <ConfidentialityBand t={dict.confidentiality} />
+      <FaqSection t={dict.faq} />
+      <LocationSection locale={lang} t={dict.location} newTab={dict.common.newTab} />
+      <ContactSection locale={lang} t={dict.contact} expertises={dict.expertises.items} />
     </>
   );
 }

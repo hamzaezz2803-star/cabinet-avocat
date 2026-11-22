@@ -5,8 +5,9 @@ import { CircleAlert, CircleCheck, LoaderCircle } from "lucide-react";
 
 import { submitContact } from "@/app/actions/contact";
 import { Button } from "@/components/ui/button";
+import type { Locale } from "@/lib/i18n/config";
+import type { Dictionary } from "@/lib/i18n/dictionaries/fr";
 import { cn } from "@/lib/utils";
-import { contactTopics } from "@/lib/content";
 import { initialContactState, type ContactField } from "@/lib/validation/contact-state";
 
 const fieldClass =
@@ -15,13 +16,13 @@ const fieldClass =
 interface FieldProps {
   id: ContactField;
   label: string;
-  optional?: boolean;
+  optionalLabel?: string;
   error?: string;
   hint?: string;
   children: (describedBy: string | undefined) => React.ReactNode;
 }
 
-function Field({ id, label, optional, error, hint, children }: FieldProps) {
+function Field({ id, label, optionalLabel, error, hint, children }: FieldProps) {
   const hintId = hint ? `${id}-hint` : undefined;
   const errorId = error ? `${id}-error` : undefined;
   const describedBy = [hintId, errorId].filter(Boolean).join(" ") || undefined;
@@ -30,7 +31,7 @@ function Field({ id, label, optional, error, hint, children }: FieldProps) {
     <div>
       <label htmlFor={id} className="mb-2 block text-[0.9375rem] font-medium">
         {label}
-        {optional ? <span className="font-normal text-muted-foreground"> (facultatif)</span> : null}
+        {optionalLabel ? <span className="font-normal text-muted-foreground"> {optionalLabel}</span> : null}
       </label>
       {children(describedBy)}
       {hint ? (
@@ -48,7 +49,13 @@ function Field({ id, label, optional, error, hint, children }: FieldProps) {
   );
 }
 
-export function ContactForm() {
+interface ContactFormProps {
+  locale: Locale;
+  t: Dictionary["contact"]["form"];
+  topics: { value: string; label: string }[];
+}
+
+export function ContactForm({ locale, t, topics }: ContactFormProps) {
   const [state, formAction, pending] = useActionState(submitContact, initialContactState);
   const startedAtRef = useRef<HTMLInputElement>(null);
   const statusRef = useRef<HTMLDivElement>(null);
@@ -68,19 +75,8 @@ export function ContactForm() {
   const formKey = `${state.status}-${state.message}-${Object.keys(err).join()}`;
 
   return (
-    <form
-      key={formKey}
-      action={formAction}
-      noValidate
-      className="rounded-lg border bg-card p-6 sm:p-8 lg:p-10"
-    >
-      <div
-        ref={statusRef}
-        tabIndex={-1}
-        role="status"
-        aria-live="polite"
-        className="outline-none empty:hidden"
-      >
+    <form key={formKey} action={formAction} noValidate className="rounded-lg border bg-card p-6 sm:p-8 lg:p-10">
+      <div ref={statusRef} tabIndex={-1} role="status" aria-live="polite" className="outline-none empty:hidden">
         {state.status === "success" ? (
           <p className="mb-8 flex items-start gap-3 rounded-lg border border-success/40 bg-success/[0.06] p-4 text-success">
             <CircleCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0" strokeWidth={1.75} />
@@ -96,14 +92,15 @@ export function ContactForm() {
       </div>
 
       {/* Contrôles anti-robot : invisibles et ignorés par les technologies d'assistance. */}
-      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
-        <label htmlFor="website">Ne pas remplir ce champ</label>
+      <div aria-hidden="true" className="absolute -start-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor="website">{t.honeypot}</label>
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
       <input ref={startedAtRef} type="hidden" name="startedAt" defaultValue="" />
+      <input type="hidden" name="locale" value={locale} />
 
       <div className="grid gap-6 sm:grid-cols-2">
-        <Field id="name" label="Nom et prénom" error={err.name}>
+        <Field id="name" label={t.name} error={err.name}>
           {(describedBy) => (
             <input
               id="name"
@@ -120,12 +117,13 @@ export function ContactForm() {
           )}
         </Field>
 
-        <Field id="email" label="Adresse e-mail" error={err.email}>
+        <Field id="email" label={t.email} error={err.email}>
           {(describedBy) => (
             <input
               id="email"
               name="email"
               type="email"
+              dir="ltr"
               autoComplete="email"
               inputMode="email"
               required
@@ -133,30 +131,31 @@ export function ContactForm() {
               defaultValue={v.email}
               aria-invalid={err.email ? true : undefined}
               aria-describedby={describedBy}
-              className={cn(fieldClass, "h-12")}
+              className={cn(fieldClass, "h-12 rtl:text-end")}
             />
           )}
         </Field>
 
-        <Field id="phone" label="Téléphone" optional error={err.phone}>
+        <Field id="phone" label={t.phone} optionalLabel={t.optional} error={err.phone}>
           {(describedBy) => (
             <input
               id="phone"
               name="phone"
               type="tel"
+              dir="ltr"
               autoComplete="tel"
               inputMode="tel"
               maxLength={20}
-              placeholder="06 12 34 56 78"
+              placeholder={t.phonePlaceholder}
               defaultValue={v.phone}
               aria-invalid={err.phone ? true : undefined}
               aria-describedby={describedBy}
-              className={cn(fieldClass, "h-12")}
+              className={cn(fieldClass, "h-12 rtl:text-end")}
             />
           )}
         </Field>
 
-        <Field id="topic" label="Domaine concerné" error={err.topic}>
+        <Field id="topic" label={t.topic} error={err.topic}>
           {(describedBy) => (
             <select
               id="topic"
@@ -165,16 +164,19 @@ export function ContactForm() {
               defaultValue={v.topic ?? ""}
               aria-invalid={err.topic ? true : undefined}
               aria-describedby={describedBy}
-              className={cn(fieldClass, "h-12 appearance-none bg-[length:1rem] bg-[right_1rem_center] bg-no-repeat pr-10")}
+              className={cn(
+                fieldClass,
+                "h-12 appearance-none bg-[length:1rem] bg-[right_1rem_center] bg-no-repeat pe-10 rtl:bg-[left_1rem_center]"
+              )}
               style={{
                 backgroundImage:
                   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238c6d33' stroke-width='1.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E\")",
               }}
             >
               <option value="" disabled>
-                Choisir un domaine
+                {t.topicPlaceholder}
               </option>
-              {contactTopics.map((topic) => (
+              {topics.map((topic) => (
                 <option key={topic.value} value={topic.value}>
                   {topic.label}
                 </option>
@@ -184,12 +186,7 @@ export function ContactForm() {
         </Field>
 
         <div className="sm:col-span-2">
-          <Field
-            id="message"
-            label="Votre demande"
-            error={err.message}
-            hint="Quelques lignes suffisent : la nature du problème et son urgence éventuelle."
-          >
+          <Field id="message" label={t.message} error={err.message} hint={t.messageHint}>
             {(describedBy) => (
               <textarea
                 id="message"
@@ -219,13 +216,9 @@ export function ContactForm() {
               className="mt-0.5 size-5 shrink-0 cursor-pointer rounded-sm border-input accent-primary"
             />
             <label htmlFor="consent" className="cursor-pointer text-[0.9375rem] leading-relaxed text-muted-foreground">
-              J&apos;accepte que mes informations soient utilisées par le cabinet pour répondre à ma
-              demande, conformément à la{" "}
-              <a
-                href="/confidentialite"
-                className="text-foreground underline decoration-brass underline-offset-4"
-              >
-                politique de confidentialité
+              {t.consentBefore}{" "}
+              <a href={`/${locale}/confidentialite`} className="text-foreground underline decoration-brass underline-offset-4">
+                {t.consentLink}
               </a>
               .
             </label>
@@ -243,10 +236,10 @@ export function ContactForm() {
         {pending ? (
           <>
             <LoaderCircle aria-hidden="true" className="size-4 animate-spin" />
-            Envoi en cours
+            {t.sending}
           </>
         ) : (
-          "Envoyer ma demande"
+          t.submit
         )}
       </Button>
     </form>
