@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { ContactInput } from "@/lib/validation/contact";
-import { contactTopics } from "@/lib/content";
+import { fr } from "@/lib/i18n/dictionaries/fr";
 
 /**
  * Envoi de la demande au cabinet via l'API Resend (appel HTTP, sans SDK).
@@ -19,7 +19,8 @@ const escapeHtml = (value: string) =>
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
-export async function sendContactEmail(data: ContactInput): Promise<SendResult> {
+/** L'e-mail au cabinet est toujours rédigé en français ; la langue du visiteur est indiquée. */
+export async function sendContactEmail(data: ContactInput, locale: string): Promise<SendResult> {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL;
   const from = process.env.CONTACT_FROM_EMAIL;
@@ -33,11 +34,14 @@ export async function sendContactEmail(data: ContactInput): Promise<SendResult> 
     return "unavailable";
   }
 
-  const topic = contactTopics.find((t) => t.value === data.topic)?.label ?? data.topic;
+  const topic =
+    fr.expertises.items.find((t) => t.id === data.topic)?.title ??
+    (data.topic === "autre" ? fr.contact.form.otherTopic : data.topic);
   const rows: [string, string][] = [
     ["Nom", data.name],
     ["E-mail", data.email],
     ["Téléphone", data.phone ?? "Non indiqué"],
+    ["Langue du site", locale.toUpperCase()],
     ["Domaine", topic],
   ];
 
