@@ -82,7 +82,7 @@ export const siteConfig: SiteConfig = {
     { day: "Dimanche", open: null, close: null },
   ],
   mapQuery: "H9VX+F3 Casablanca",
-  accessNote: "7e étage de l'Espace Yousra, boulevard Mohammed V",
+  accessNote: null,
   legal: {
     legalForm: null,
     ice: null,

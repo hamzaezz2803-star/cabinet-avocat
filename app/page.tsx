@@ -3,6 +3,7 @@ import { ContactSection } from "@/components/sections/contact-section";
 import { ExpertisesSection } from "@/components/sections/expertises-section";
 import { FaqSection } from "@/components/sections/faq-section";
 import { FirmSection } from "@/components/sections/firm-section";
+import { LocationSection } from "@/components/sections/location-section";
 import { MethodSection } from "@/components/sections/method-section";
 import { ReviewsSection } from "@/components/sections/reviews-section";
 import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
@@ -75,6 +76,7 @@ export default function HomePage() {
       <MethodSection />
       <ConfidentialityBand />
       <FaqSection />
+      <LocationSection />
       <ContactSection />
     </>
   );

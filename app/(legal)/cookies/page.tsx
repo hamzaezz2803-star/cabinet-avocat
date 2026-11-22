@@ -21,6 +21,15 @@ export default function CookiesPage() {
         Les polices de caractères et les images sont servies directement par le site. Votre
         navigation n&apos;entraîne aucune requête vers un service tiers.
       </p>
+      <p>
+        Seule exception : la carte de la section « Accès » est fournie par Google Maps. Elle ne se
+        charge que si vous cliquez sur « Afficher la carte ». Google peut alors déposer ses propres
+        cookies, selon sa{" "}
+        <a href="https://policies.google.com/privacy?hl=fr" target="_blank" rel="noopener noreferrer">
+          politique de confidentialité
+        </a>
+        . Les liens d&apos;itinéraire ouvrent Google Maps ou Waze dans un nouvel onglet.
+      </p>
 
       <h2>Évolution</h2>
       <p>
