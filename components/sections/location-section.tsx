@@ -1,4 +1,4 @@
-import { Navigation, Phone } from "lucide-react";
+import { Mail, Navigation, Phone } from "lucide-react";
 
 import { LocationMap } from "@/components/sections/location-map";
 import { OpeningHours } from "@/components/sections/opening-hours";
@@ -8,7 +8,7 @@ import { formatPhoneMa, siteConfig } from "@/lib/site-config";
 
 /** Accès au cabinet : carte (chargée au clic), adresse, itinéraires et jours d'ouverture. */
 export function LocationSection() {
-  const { address, phone, schedule, mapQuery, accessNote, name } = siteConfig;
+  const { address, phone, email, schedule, mapQuery, accessNote, name } = siteConfig;
   const cityLine = [address.postalCode, address.city].filter(Boolean).join(" ");
   const fullAddress = [address.street, cityLine].filter(Boolean).join(", ");
   const destination = encodeURIComponent(mapQuery);
@@ -21,8 +21,8 @@ export function LocationSection() {
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <SectionHeading id="acces-title" title="Venir au cabinet" className="lg:col-span-7" />
           <p className="max-w-[46ch] text-lg leading-relaxed text-muted-foreground lg:col-span-5">
-            Les rendez-vous ont lieu au cabinet, en plein centre de Casablanca. Appelez avant de
-            venir pour fixer un créneau.
+            Le cabinet, en plein centre de Casablanca, reçoit uniquement sur rendez-vous le mardi,
+            le mercredi et le jeudi. Appelez ou écrivez pour fixer un créneau.
           </p>
         </div>
 
@@ -61,22 +61,35 @@ export function LocationSection() {
             </div>
 
             <div>
-              <h3 className="text-[1.75rem] leading-tight">Jours d&apos;ouverture</h3>
+              <h3 className="text-[1.75rem] leading-tight">Jours de réception</h3>
               <div className="mt-5">
                 <OpeningHours schedule={schedule} />
               </div>
-              {phone ? (
-                <p className="mt-5 flex items-center gap-2 text-[0.9375rem] text-muted-foreground">
-                  <Phone aria-hidden="true" className="size-4 text-brass" strokeWidth={1.5} />
-                  Pour un rendez-vous :{" "}
-                  <a
-                    href={`tel:${phone}`}
-                    className="font-medium text-foreground underline decoration-brass underline-offset-4"
-                  >
-                    {formatPhoneMa(phone)}
-                  </a>
-                </p>
-              ) : null}
+              <ul className="mt-5 space-y-2 text-[0.9375rem] text-muted-foreground">
+                {phone ? (
+                  <li className="flex items-center gap-2">
+                    <Phone aria-hidden="true" className="size-4 shrink-0 text-brass" strokeWidth={1.5} />
+                    Pour un rendez-vous :{" "}
+                    <a
+                      href={`tel:${phone}`}
+                      className="font-medium text-foreground underline decoration-brass underline-offset-4"
+                    >
+                      {formatPhoneMa(phone)}
+                    </a>
+                  </li>
+                ) : null}
+                {email ? (
+                  <li className="flex items-center gap-2">
+                    <Mail aria-hidden="true" className="size-4 shrink-0 text-brass" strokeWidth={1.5} />
+                    <a
+                      href={`mailto:${email}`}
+                      className="font-medium break-all text-foreground underline decoration-brass underline-offset-4"
+                    >
+                      {email}
+                    </a>
+                  </li>
+                ) : null}
+              </ul>
             </div>
           </div>
         </div>

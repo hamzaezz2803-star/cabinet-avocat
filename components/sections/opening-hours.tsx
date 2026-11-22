@@ -23,6 +23,7 @@ function todayIndexInCasablanca(): number {
 const subscribeNoop = () => () => {};
 
 function describe(day: DaySchedule): string {
+  if (day.appointmentOnly) return day.open ? `Sur rendez-vous, dès ${day.open}` : "Sur rendez-vous uniquement";
   if (!day.open) return "Fermé";
   if (!day.close) return `Dès ${day.open}`;
   return `${day.open} à ${day.close}`;
@@ -40,7 +41,7 @@ export function OpeningHours({ schedule }: OpeningHoursProps) {
     <dl className="divide-y divide-border border-y">
       {schedule.map((day, i) => {
         const isToday = i === today;
-        const closed = !day.open;
+        const closed = !day.open && !day.appointmentOnly;
         return (
           <div
             key={day.day}

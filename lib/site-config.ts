@@ -44,10 +44,12 @@ export interface SiteConfig {
 
 export interface DaySchedule {
   day: string;
-  /** null : fermé. */
+  /** null : fermé (sauf si `appointmentOnly`). */
   open: string | null;
-  /** null avec `open` renseigné : heure de fermeture inconnue (à compléter). */
+  /** null avec `open` renseigné : heure de fermeture non communiquée. */
   close: string | null;
+  /** Reçoit uniquement sur rendez-vous. */
+  appointmentOnly?: boolean;
 }
 
 export const siteConfig: SiteConfig = {
@@ -60,25 +62,21 @@ export const siteConfig: SiteConfig = {
   bar: null,
   address: {
     street: "Espace Yousra, 7e étage, 355 (N° 93) boulevard Mohammed V",
-    postalCode: null,
+    postalCode: "20232",
     city: "Casablanca",
     country: "Maroc",
   },
   phone: "+212664559661",
-  email: null,
-  /** D'après la fiche Google : ouverture à 8:00, fermé le dimanche. Horaires de fermeture à confirmer. */
-  hours: "À partir de 8:00, fermé le dimanche",
-  /**
-   * D'après la fiche Google : ouverture 8:00, fermé le dimanche.
-   * À CONFIRMER par le cabinet : heures de fermeture et samedi.
-   */
+  email: "sabour.fatna@gmail.com",
+  hours: "Mardi, mercredi et jeudi, sur rendez-vous uniquement",
+  /** Communiqué par le cabinet (22 nov. 2026). */
   schedule: [
-    { day: "Lundi", open: "08:00", close: null },
-    { day: "Mardi", open: "08:00", close: null },
-    { day: "Mercredi", open: "08:00", close: null },
-    { day: "Jeudi", open: "08:00", close: null },
-    { day: "Vendredi", open: "08:00", close: null },
-    { day: "Samedi", open: "08:00", close: null },
+    { day: "Lundi", open: null, close: null },
+    { day: "Mardi", open: null, close: null, appointmentOnly: true },
+    { day: "Mercredi", open: null, close: null, appointmentOnly: true },
+    { day: "Jeudi", open: null, close: null, appointmentOnly: true },
+    { day: "Vendredi", open: null, close: null },
+    { day: "Samedi", open: null, close: null },
     { day: "Dimanche", open: null, close: null },
   ],
   mapQuery: "H9VX+F3 Casablanca",
