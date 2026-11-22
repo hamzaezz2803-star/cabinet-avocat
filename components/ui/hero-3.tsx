@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 /**
  * Héros « marquee » inspiré du composant hero-3 (21st.dev), adapté aux règles du projet :
  * - tient dans la hauteur de l'écran, bandeau photo compris (tailles en fonction de vh) ;
- * - fond DarkVeil (React Bits) aux couleurs du cabinet ;
+ * - fond vert forêt + DarkVeil (React Bits) aux couleurs du cabinet ;
  * - entrée en CSS (visible sans JavaScript, sans retarder le LCP) ;
  * - bandeau pausable, `alt` descriptifs, mouvement coupé si `prefers-reduced-motion`.
  */
@@ -44,7 +44,7 @@ export function AnimatedMarqueeHero({
     <section
       aria-labelledby="hero-title"
       className={cn(
-        "relative isolate flex h-svh min-h-[34rem] flex-col overflow-hidden pt-(--header-height)",
+        "theme-hero relative isolate flex h-svh min-h-[34rem] flex-col overflow-hidden bg-background pt-(--header-height)",
         className
       )}
     >
@@ -52,9 +52,9 @@ export function AnimatedMarqueeHero({
 
       <div className="container-site flex min-h-0 flex-1 flex-col items-center justify-center py-[clamp(0.75rem,3vh,2.5rem)] text-center">
         <p className="flex animate-rise items-center gap-3 text-sm font-medium text-brass-text md:text-[0.9375rem]">
-          <span aria-hidden="true" className="h-px w-8 bg-brass" />
+          <span aria-hidden="true" className="h-px w-8 bg-brass-light" />
           {tagline}
-          <span aria-hidden="true" className="h-px w-8 bg-brass" />
+          <span aria-hidden="true" className="h-px w-8 bg-brass-light" />
         </p>
 
         <h1

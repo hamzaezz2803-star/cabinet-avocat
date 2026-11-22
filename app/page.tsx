@@ -4,6 +4,7 @@ import { ExpertisesSection } from "@/components/sections/expertises-section";
 import { FaqSection } from "@/components/sections/faq-section";
 import { FirmSection } from "@/components/sections/firm-section";
 import { MethodSection } from "@/components/sections/method-section";
+import { ReviewsSection } from "@/components/sections/reviews-section";
 import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
 import { expertises, faqs, hero } from "@/lib/content";
 import { siteConfig } from "@/lib/site-config";
@@ -70,6 +71,7 @@ export default function HomePage() {
       />
       <ExpertisesSection />
       <FirmSection />
+      <ReviewsSection />
       <MethodSection />
       <ConfidentialityBand />
       <FaqSection />

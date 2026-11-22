@@ -11,6 +11,7 @@ export interface NavItem {
 export const navItems: NavItem[] = [
   { label: "Expertises", href: "/#expertises" },
   { label: "Le cabinet", href: "/#cabinet" },
+  { label: "Avis", href: "/#avis" },
   { label: "Méthode", href: "/#methode" },
   { label: "Questions", href: "/#questions" },
   { label: "Contact", href: "/#contact" },
@@ -192,3 +193,29 @@ export const contactTopics = [
   ...expertises.map((e) => ({ value: e.id, label: e.title })),
   { value: "autre", label: "Autre sujet" },
 ];
+
+export interface Review {
+  author: string;
+  date: string;
+  text: string;
+}
+
+/**
+ * Avis publics de la fiche Google du cabinet, relevés le 22 nov. 2026.
+ * Noms abrégés (prénom + initiale) par discrétion ; émojis retirés.
+ * À VÉRIFIER : textes reconstitués en français depuis la traduction Google.
+ * Remplacer par le texte original exact (« Voir l'original ») avant la mise en ligne.
+ */
+export const reviews = {
+  title: "Ce qu'en disent les clients",
+  rating: 4.3,
+  count: 6,
+  source: "Google",
+  retrievedAt: "nov. 2026",
+  url: "https://www.google.com/maps/search/?api=1&query=Avocat%20Maitre%20Sabour%20Fatna%20Casablanca",
+  items: [
+    { author: "Amine E.", date: "2022", text: "Meilleur avocat à Casablanca." },
+    { author: "Med S.", date: "2026", text: "Bon courage… Sérieux et rigoureux." },
+    { author: "Mouna Z.", date: "2025", text: "Meilleur avocat." },
+  ] satisfies Review[],
+};

@@ -48,7 +48,7 @@ export function ImageMarquee({ images, className, style }: ImageMarqueeProps) {
             <li
               key={image.key}
               aria-hidden={image.decorative || undefined}
-              className="relative aspect-[3/4] h-[clamp(7.5rem,21vh,16rem)] shrink-0 overflow-hidden rounded-md bg-stone shadow-lift"
+              className="relative aspect-[3/4] h-[clamp(7.5rem,21vh,16rem)] shrink-0 overflow-hidden rounded-md bg-foreground/10 shadow-[0_18px_40px_-16px_rgb(0_0_0/0.55)]"
               style={{ rotate: TILTS[index % TILTS.length] }}
             >
               <Image

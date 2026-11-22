@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Brand } from "@/components/layout/brand";
@@ -11,6 +12,8 @@ import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
+  // Sur l'accueil, tant que l'en-tête survole le héros vert, il reprend ses couleurs.
+  const overHero = usePathname() === "/" && !scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -23,7 +26,11 @@ export function SiteHeader() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-40 h-(--header-height) border-b transition-colors duration-200",
-        scrolled ? "border-border bg-background" : "border-transparent bg-background/0"
+        overHero
+          ? "theme-hero border-transparent bg-transparent"
+          : scrolled
+            ? "border-border bg-background"
+            : "border-transparent bg-transparent"
       )}
     >
       <div className="container-site flex h-full items-center justify-between gap-6">
