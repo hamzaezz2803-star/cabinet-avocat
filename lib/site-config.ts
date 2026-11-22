@@ -27,6 +27,12 @@ export interface SiteConfig {
   phone: string | null;
   email: string | null;
   hours: string | null;
+  /** Semaine de travail, du lundi au dimanche. Heures au format 24 h « HH:MM ». */
+  schedule: DaySchedule[];
+  /** Recherche Google Maps (plus code de la fiche Google, plus précis qu'une adresse). */
+  mapQuery: string;
+  /** Précision d'accès affichée sous l'adresse. */
+  accessNote: string | null;
   legal: {
     legalForm: string | null;
     ice: string | null;
@@ -34,6 +40,14 @@ export interface SiteConfig {
     publicationDirector: string | null;
     host: string | null;
   };
+}
+
+export interface DaySchedule {
+  day: string;
+  /** null : fermé. */
+  open: string | null;
+  /** null avec `open` renseigné : heure de fermeture inconnue (à compléter). */
+  close: string | null;
 }
 
 export const siteConfig: SiteConfig = {
@@ -54,6 +68,21 @@ export const siteConfig: SiteConfig = {
   email: null,
   /** D'après la fiche Google : ouverture à 8:00, fermé le dimanche. Horaires de fermeture à confirmer. */
   hours: "À partir de 8:00, fermé le dimanche",
+  /**
+   * D'après la fiche Google : ouverture 8:00, fermé le dimanche.
+   * À CONFIRMER par le cabinet : heures de fermeture et samedi.
+   */
+  schedule: [
+    { day: "Lundi", open: "08:00", close: null },
+    { day: "Mardi", open: "08:00", close: null },
+    { day: "Mercredi", open: "08:00", close: null },
+    { day: "Jeudi", open: "08:00", close: null },
+    { day: "Vendredi", open: "08:00", close: null },
+    { day: "Samedi", open: "08:00", close: null },
+    { day: "Dimanche", open: null, close: null },
+  ],
+  mapQuery: "H9VX+F3 Casablanca",
+  accessNote: "7e étage de l'Espace Yousra, boulevard Mohammed V",
   legal: {
     legalForm: null,
     ice: null,
