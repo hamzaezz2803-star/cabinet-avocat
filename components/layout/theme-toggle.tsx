@@ -1,12 +1,24 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
+import { THEME_STORAGE_KEY } from "@/lib/theme";
 
 interface ThemeToggleProps {
   labels: { toggle: string; light: string; dark: string };
+}
+
+/** Applique un thème et mémorise le choix (stockage local, jamais transmis au serveur). */
+function applyTheme(dark: boolean) {
+  const root = document.documentElement;
+  root.classList.toggle("dark", dark);
+  root.style.colorScheme = dark ? "dark" : "light";
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, dark ? "dark" : "light");
+  } catch {
+    // Stockage indisponible (navigation privée) : le choix vaut pour la page en cours.
+  }
 }
 
 /**
@@ -14,14 +26,11 @@ interface ThemeToggleProps {
  * (classe `dark`), ce qui évite tout écart d'hydratation.
  */
 export function ThemeToggle({ labels }: ThemeToggleProps) {
-  const { resolvedTheme, setTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
-
   return (
     <Button
       variant="ghost"
       size="icon"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={() => applyTheme(!document.documentElement.classList.contains("dark"))}
       aria-label={labels.toggle}
       title={labels.toggle}
     >
