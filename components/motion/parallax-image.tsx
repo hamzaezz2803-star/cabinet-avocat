@@ -1,8 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
@@ -14,11 +10,14 @@ interface ParallaxImageProps {
   imageClassName?: string;
   /** Amplitude du déplacement, en pourcentage de la hauteur (8 par défaut). */
   strength?: number;
+  /** Révélation de bas en haut à l'arrivée dans l'écran. */
+  reveal?: boolean;
 }
 
 /**
- * Photo avec parallaxe verticale légère (transform uniquement).
- * Supprimée si l'utilisateur préfère réduire les animations.
+ * Photo avec parallaxe verticale légère, animée par GSAP (components/motion/scroll-animations).
+ * L'image déborde de ±strength % pour que le déplacement ne laisse jamais de bord vide.
+ * Sans JavaScript ou avec mouvement réduit : image fixe.
  */
 export function ParallaxImage({
   src,
@@ -27,31 +26,21 @@ export function ParallaxImage({
   className,
   imageClassName,
   strength = 8,
+  reveal = false,
 }: ParallaxImageProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], [`-${strength}%`, `${strength}%`]);
-
   return (
-    <div ref={ref} className={cn("relative overflow-hidden", className)}>
-      <motion.div
-        className="absolute inset-x-0"
-        style={{
-          y: reduce ? 0 : y,
-          top: `-${strength}%`,
-          bottom: `-${strength}%`,
-        }}
+    <div
+      data-parallax={strength}
+      data-reveal-clip={reveal ? "" : undefined}
+      className={cn("relative overflow-hidden", className)}
+    >
+      <div
+        data-parallax-inner
+        className="absolute inset-x-0 will-change-transform"
+        style={{ top: `-${strength}%`, bottom: `-${strength}%` }}
       >
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes={sizes}
-          quality={80}
-          className={cn("object-cover", imageClassName)}
-        />
-      </motion.div>
+        <Image src={src} alt={alt} fill sizes={sizes} quality={80} className={cn("object-cover", imageClassName)} />
+      </div>
     </div>
   );
 }

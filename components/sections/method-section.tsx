@@ -1,8 +1,3 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
-
 import { SectionHeading } from "@/components/sections/section-heading";
 
 interface MethodSectionProps {
@@ -14,37 +9,39 @@ interface MethodSectionProps {
   };
 }
 
-/** Méthode : vraie séquence, donc numérotée. La frise se trace avec le défilement. */
+/**
+ * Méthode : vraie séquence, donc numérotée. La frise se trace au défilement et les étapes
+ * apparaissent en cascade (GSAP, data-draw / data-reveal-group). Sans JS : frise pleine.
+ */
 export function MethodSection({ t }: MethodSectionProps) {
-  const ref = useRef<HTMLOListElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 60%"] });
-  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
-
   return (
     <section id="methode" aria-labelledby="methode-title" className="theme-ink py-24 lg:py-36">
       <div className="container-site">
         <SectionHeading id="methode-title" title={t.title} intro={t.intro} />
 
-        <ol ref={ref} className="relative mt-16 grid gap-12 lg:mt-24 lg:grid-cols-4 lg:gap-10">
+        <ol data-reveal-group className="relative mt-16 grid gap-12 lg:mt-24 lg:grid-cols-4 lg:gap-10">
           {/* Frise : verticale sur mobile, horizontale au bureau (sens de lecture respecté). */}
           <span
             aria-hidden="true"
             className="absolute start-[0.6875rem] top-2 bottom-2 w-px bg-border lg:start-0 lg:end-0 lg:top-[0.6875rem] lg:bottom-auto lg:h-px lg:w-auto"
           />
-          <motion.span
+          <span
             aria-hidden="true"
+            data-draw="y"
             className="absolute start-[0.6875rem] top-2 bottom-2 w-px origin-top bg-brass-light lg:hidden"
-            style={{ scaleY: reduce ? 1 : progress }}
           />
-          <motion.span
+          <span
             aria-hidden="true"
+            data-draw="x"
             className="absolute start-0 end-0 top-[0.6875rem] hidden h-px origin-left bg-brass-light lg:block rtl:origin-right"
-            style={{ scaleX: reduce ? 1 : progress }}
           />
 
           {t.steps.map((step, i) => (
-            <li key={step.title} className="relative grid grid-cols-[1.5rem_1fr] gap-x-6 lg:block">
+            <li
+              key={step.title}
+              data-reveal-item
+              className="relative grid grid-cols-[1.5rem_1fr] gap-x-6 lg:block"
+            >
               <span
                 aria-hidden="true"
                 className="relative z-10 grid size-6 place-items-center rounded-full border border-brass-light bg-background"

@@ -16,7 +16,7 @@ export function FaqSection({ t }: { t: Dictionary["faq"] }) {
           <div className="lg:sticky lg:top-[calc(var(--header-height)+2rem)]">
             <SectionHeading id="questions-title" title={t.title} intro={t.intro} />
 
-            <aside className="theme-hero relative mt-10 overflow-hidden rounded-lg bg-background p-7 sm:p-8">
+            <aside data-reveal className="theme-hero relative mt-10 overflow-hidden rounded-lg bg-background p-7 sm:p-8">
               <MessageCircleQuestion
                 aria-hidden="true"
                 className="absolute -end-6 -top-6 size-36 text-brass-light/10"

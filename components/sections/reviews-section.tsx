@@ -52,7 +52,7 @@ function ReviewCard({
     : null;
 
   return (
-    <li className="flex flex-col rounded-lg border bg-card p-6 shadow-lift transition-colors duration-200 hover:border-brass/40 sm:p-7">
+    <li data-reveal-item className="flex flex-col rounded-lg border bg-card p-6 shadow-lift transition-colors duration-200 hover:border-brass/40 sm:p-7">
       <div className="flex items-start gap-3">
         <span
           aria-hidden="true"
@@ -132,7 +132,7 @@ export function ReviewsSection({ locale, t }: { locale: Locale; t: Dictionary["r
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <SectionHeading id="avis-title" title={t.title} intro={t.intro} className="lg:col-span-6" />
 
-          <div className="flex flex-col gap-5 rounded-lg border bg-card p-6 sm:flex-row sm:items-center sm:justify-between lg:col-span-6 lg:p-7">
+          <div data-reveal className="flex flex-col gap-5 rounded-lg border bg-card p-6 sm:flex-row sm:items-center sm:justify-between lg:col-span-6 lg:p-7">
             <div className="flex items-center gap-5">
               <p className="font-[family-name:var(--font-caslon)] text-6xl leading-none">
                 <bdi dir="ltr">{ratingText}</bdi>
@@ -157,7 +157,7 @@ export function ReviewsSection({ locale, t }: { locale: Locale; t: Dictionary["r
           </div>
         </div>
 
-        <ul className="mt-12 grid gap-5 md:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-6">
+        <ul data-reveal-group className="mt-12 grid gap-5 md:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-6">
           {items.map((review, i) => (
             <ReviewCard key={review.author} review={review} index={i} t={t} />
           ))}

@@ -10,6 +10,7 @@ import { GallerySection } from "@/components/sections/gallery-section";
 import { LocationSection } from "@/components/sections/location-section";
 import { MethodSection } from "@/components/sections/method-section";
 import { ReviewsSection } from "@/components/sections/reviews-section";
+import { ScrollAnimations } from "@/components/motion/scroll-animations";
 import { AnimatedMarqueeHero } from "@/components/ui/hero-3";
 import { hasLocale, type Locale } from "@/lib/i18n/config";
 import { getDictionary, type Dictionary } from "@/lib/i18n/get-dictionary";
@@ -94,6 +95,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       <FaqSection t={dict.faq} />
       <LocationSection locale={lang} t={dict.location} newTab={dict.common.newTab} />
       <ContactSection locale={lang} t={dict.contact} expertises={dict.expertises.items} />
+      <ScrollAnimations />
     </>
   );
 }

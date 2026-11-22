@@ -26,7 +26,7 @@ export function GallerySection({ locale, t, alts }: GallerySectionProps) {
       <div className="container-site text-center">
         <SectionHeading id="galerie-title" title={t.title} intro={t.intro} className="mx-auto" />
       </div>
-      <div className="mx-auto mt-12 max-w-5xl px-5 lg:mt-16">
+      <div data-reveal className="mx-auto mt-12 max-w-5xl px-5 lg:mt-16">
         <Carousel003Client
           images={images}
           dir={localeDir(locale)}

@@ -36,12 +36,13 @@ export function ExpertisesSection({ t }: { t: Dictionary["expertises"] }) {
           </p>
         </div>
 
-        <ul className="mt-14 grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-2 lg:mt-20 lg:grid-cols-3">
+        <ul data-reveal-group className="mt-14 grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-2 lg:mt-20 lg:grid-cols-3">
           {t.items.map((item) => {
             const Icon = ICONS[item.id] ?? Scale;
             return (
               <li
                 key={item.id}
+                data-reveal-item
                 className="group relative flex flex-col bg-background p-7 transition-colors duration-200 hover:bg-card sm:p-8 lg:p-10"
               >
                 <span

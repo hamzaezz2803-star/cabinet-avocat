@@ -32,7 +32,7 @@ export function LocationSection({ locale, t, newTab }: LocationSectionProps) {
         </div>
 
         <div className="mt-14 grid gap-10 lg:mt-20 lg:grid-cols-12 lg:gap-10">
-          <div className="relative min-h-[22rem] overflow-hidden rounded-lg border sm:min-h-[26rem] lg:col-span-7 lg:min-h-full">
+          <div data-reveal-clip className="relative min-h-[22rem] overflow-hidden rounded-lg border sm:min-h-[26rem] lg:col-span-7 lg:min-h-full">
             <LocationMap
               query={mapQuery}
               label={name}
@@ -42,7 +42,7 @@ export function LocationSection({ locale, t, newTab }: LocationSectionProps) {
             />
           </div>
 
-          <div className="flex flex-col gap-10 lg:col-span-5">
+          <div data-reveal className="flex flex-col gap-10 lg:col-span-5">
             <div>
               <h3 className="text-[1.75rem] leading-tight">{t.addressTitle}</h3>
               <address className="mt-4 text-lg leading-relaxed not-italic">

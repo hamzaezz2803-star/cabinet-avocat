@@ -20,13 +20,20 @@ interface FaqAccordionProps {
  */
 export function FaqAccordion({ items }: FaqAccordionProps) {
   return (
-    <AccordionPrimitive.Root type="single" collapsible defaultValue="faq-0" className="space-y-3">
+    <AccordionPrimitive.Root
+      type="single"
+      collapsible
+      defaultValue="faq-0"
+      data-reveal-group
+      className="space-y-3"
+    >
       {items.map((item, i) => {
         const Icon = ICONS[item.icon] ?? CalendarClock;
         return (
           <AccordionPrimitive.Item
             key={item.question}
             value={`faq-${i}`}
+            data-reveal-item
             className="group/item overflow-hidden rounded-lg border bg-background transition-[background-color,border-color,box-shadow] duration-200 data-[state=open]:border-brass/50 data-[state=open]:bg-card data-[state=open]:shadow-lift"
           >
             <AccordionPrimitive.Header>

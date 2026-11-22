@@ -60,9 +60,9 @@ export function ContactSection({ locale, t, expertises }: ContactSectionProps) {
             {t.warning}
           </p>
 
-          <dl className="mt-12 space-y-5">
+          <dl data-reveal-group className="mt-12 space-y-5">
             {lines.map(({ icon: Icon, label, value }) => (
-              <div key={label} className="grid grid-cols-[1.25rem_1fr] gap-x-4">
+              <div key={label} data-reveal-item className="grid grid-cols-[1.25rem_1fr] gap-x-4">
                 <Icon aria-hidden="true" className="mt-1 size-5 text-brass" strokeWidth={1.5} />
                 <dt className="text-sm font-medium text-muted-foreground">{label}</dt>
                 <dd className="col-start-2 text-foreground">{value}</dd>
@@ -71,7 +71,7 @@ export function ContactSection({ locale, t, expertises }: ContactSectionProps) {
           </dl>
         </div>
 
-        <div className="lg:col-span-7">
+        <div data-reveal className="lg:col-span-7">
           <ContactForm locale={locale} t={t.form} topics={topics} />
         </div>
       </div>

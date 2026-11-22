@@ -27,7 +27,7 @@ export function AboutSection({ locale, t }: AboutSectionProps) {
     <section id="a-propos" aria-labelledby="a-propos-title" className="py-24 lg:py-36">
       <div className="container-site grid items-center gap-14 lg:grid-cols-12 lg:gap-12">
         <figure className="relative lg:col-span-5">
-          <div className="theme-hero relative aspect-[4/5] overflow-hidden rounded-lg bg-background shadow-lift">
+          <div data-reveal-clip className="theme-hero relative aspect-[4/5] overflow-hidden rounded-lg bg-background shadow-lift">
             {photo ? (
               <Image
                 src={photo}
@@ -62,18 +62,18 @@ export function AboutSection({ locale, t }: AboutSectionProps) {
           <SectionHeading id="a-propos-title" title={t.title} />
           <p className="mt-4 font-heading text-2xl text-brass-text">{name}</p>
 
-          <div className="mt-8 max-w-[60ch] space-y-5 text-lg leading-relaxed text-muted-foreground">
+          <div data-reveal className="mt-8 max-w-[60ch] space-y-5 text-lg leading-relaxed text-muted-foreground">
             {t.paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
 
           <h3 className="sr-only">{t.factsTitle}</h3>
-          <dl className="mt-10 grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
+          <dl data-reveal-group className="mt-10 grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-3">
             {t.facts.map((fact, i) => {
               const Icon = FACT_ICONS[i % FACT_ICONS.length];
               return (
-                <div key={fact.label} className="bg-card p-5">
+                <div key={fact.label} data-reveal-item className="bg-card p-5">
                   <Icon aria-hidden="true" className="size-5 text-brass" strokeWidth={1.5} />
                   <dt className="mt-3 text-sm font-medium text-muted-foreground">{fact.label}</dt>
                   <dd className="mt-1 leading-snug">{fact.value}</dd>

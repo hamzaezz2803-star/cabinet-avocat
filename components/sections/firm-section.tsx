@@ -16,16 +16,17 @@ export function FirmSection({ t }: { t: Dictionary["firm"] }) {
           sizes="(min-width: 1024px) 40vw, 100vw"
           className="aspect-[4/5] rounded-sm bg-stone sm:aspect-[16/11] lg:col-span-5 lg:aspect-[4/5]"
           imageClassName="saturate-[0.85]"
+          reveal
         />
 
         <div className="lg:col-span-6 lg:col-start-7 lg:self-center">
           <SectionHeading id="cabinet-title" title={t.title} intro={t.intro} />
 
-          <dl className="mt-12 space-y-8">
+          <dl data-reveal-group className="mt-12 space-y-8">
             {t.principles.map((principle, i) => {
               const Icon = ICONS[i % ICONS.length];
               return (
-                <div key={principle.title} className="grid grid-cols-[auto_1fr] gap-x-5 border-t pt-6">
+                <div key={principle.title} data-reveal-item className="grid grid-cols-[auto_1fr] gap-x-5 border-t pt-6">
                   <Icon aria-hidden="true" className="mt-1 size-5 text-brass" strokeWidth={1.5} />
                   <dt className="font-heading text-[1.375rem] leading-snug">{principle.title}</dt>
                   <dd className="col-start-2 mt-2 max-w-[52ch] text-muted-foreground">{principle.text}</dd>
