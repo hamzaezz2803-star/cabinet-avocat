@@ -9,3 +9,9 @@ export const THEME_STORAGE_KEY = "theme";
  * pose la classe `dark` sans flash. Aucune donnée externe n'y est injectée.
  */
 export const themeInitScript = `(function(){try{var t=localStorage.getItem("${THEME_STORAGE_KEY}");var d=t?t==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;var e=document.documentElement;e.classList.toggle("dark",d);e.style.colorScheme=d?"dark":"light";}catch(_){}})();`;
+
+/**
+ * Écran d'accueil une seule fois par session : dès la deuxième page vue (ou rechargement),
+ * la classe `splash-seen` masque l'écran avant l'affichage et annule le décalage du héros.
+ */
+export const splashInitScript = `(function(){try{var k="splash-seen";if(sessionStorage.getItem(k)){document.documentElement.classList.add(k)}else{sessionStorage.setItem(k,"1")}}catch(_){}})();`;

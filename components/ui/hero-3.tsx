@@ -53,7 +53,10 @@ export function AnimatedMarqueeHero({
       <HeroVeil />
 
       <div className="container-site flex min-h-0 flex-1 flex-col items-center justify-center py-[clamp(0.75rem,3vh,2.5rem)] text-center">
-        <p className="flex animate-rise items-center gap-3 text-sm font-medium text-brass-text md:text-[0.9375rem]">
+        <p
+          className="flex animate-rise items-center gap-3 text-sm font-medium text-brass-text md:text-[0.9375rem]"
+          style={{ animationDelay: "var(--splash-delay)" }}
+        >
           <span aria-hidden="true" className="h-px w-8 bg-brass-light" />
           {tagline}
           <span aria-hidden="true" className="h-px w-8 bg-brass-light" />
@@ -67,7 +70,7 @@ export function AnimatedMarqueeHero({
             <span
               key={`${word}-${i}`}
               className="inline-block animate-rise"
-              style={{ animationDelay: `${150 + i * STAGGER_MS}ms` }}
+              style={{ animationDelay: `calc(var(--splash-delay) + ${150 + i * STAGGER_MS}ms)` }}
             >
               {word}
               {i < words.length - 1 ? " " : null}
@@ -77,14 +80,14 @@ export function AnimatedMarqueeHero({
 
         <p
           className="mt-[clamp(0.75rem,2.4vh,1.75rem)] max-w-[58ch] animate-rise text-base leading-relaxed text-muted-foreground md:text-lg"
-          style={{ animationDelay: `${afterTitle}ms` }}
+          style={{ animationDelay: `calc(var(--splash-delay) + ${afterTitle}ms)` }}
         >
           {description}
         </p>
 
         <div
           className="mt-[clamp(1rem,3.4vh,2.5rem)] flex animate-rise items-center gap-6"
-          style={{ animationDelay: `${afterTitle + 120}ms` }}
+          style={{ animationDelay: `calc(var(--splash-delay) + ${afterTitle + 120}ms)` }}
         >
           <Button asChild size="lg">
             <Link href={ctaHref}>{ctaText}</Link>
@@ -101,7 +104,7 @@ export function AnimatedMarqueeHero({
         images={images}
         labels={marqueeLabels}
         className="shrink-0 animate-rise"
-        style={{ animationDelay: `${afterTitle + 240}ms` }}
+        style={{ animationDelay: `calc(var(--splash-delay) + ${afterTitle + 240}ms)` }}
       />
     </section>
   );

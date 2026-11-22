@@ -10,10 +10,11 @@ import { notFound } from "next/navigation";
 import { InlineScript } from "@/components/inline-script";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { SplashScreen } from "@/components/layout/splash-screen";
 import { hasLocale, localeDir, locales, ogLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/get-dictionary";
 import { siteConfig } from "@/lib/site-config";
-import { themeInitScript } from "@/lib/theme";
+import { splashInitScript, themeInitScript } from "@/lib/theme";
 import "../globals.css";
 
 const caslon = Libre_Caslon_Display({
@@ -93,8 +94,10 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
       <head>
         {/* Thème avant affichage (pas de flash). Script statique, voir lib/theme.ts. */}
         <InlineScript html={themeInitScript} />
+        <InlineScript html={splashInitScript} />
       </head>
       <body className="flex min-h-svh flex-col">
+          <SplashScreen name={siteConfig.name[lang]} role={dict.about.role} />
           <a
             href="#contenu"
             className="sr-only z-[60] rounded-lg bg-primary px-4 py-3 text-primary-foreground focus:not-sr-only focus:fixed focus:start-3 focus:top-3"

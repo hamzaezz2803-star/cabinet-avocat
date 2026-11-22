@@ -1,7 +1,5 @@
 import type { CSSProperties } from "react";
 
-import { siteConfig } from "@/lib/site-config";
-
 interface SplashScreenProps {
   name: string;
   role: string;
@@ -17,14 +15,14 @@ const d = (ms: number): CSSProperties => ({ animationDelay: `${ms}ms` });
  */
 export function SplashScreen({ name, role }: SplashScreenProps) {
   return (
-    <div aria-hidden="true" className="splash">
+    <div aria-hidden="true" className="splash theme-hero">
       <div className="flex flex-col items-center text-center">
         <svg
           viewBox="0 0 120 120"
-          className="splash-scales size-28 text-brass-light sm:size-32"
+          className="splash-scales size-32 text-brass-light sm:size-44"
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.6"
+          strokeWidth="1.4"
           strokeLinecap="round"
           strokeLinejoin="round"
         >
@@ -46,14 +44,13 @@ export function SplashScreen({ name, role }: SplashScreenProps) {
           </g>
         </svg>
 
-        <p className="splash-text mt-7 font-heading text-2xl leading-tight text-paper sm:text-[1.75rem]" style={d(760)}>
+        <p className="splash-text mt-7 font-heading text-2xl leading-tight text-foreground sm:text-[1.75rem]" style={d(760)}>
           {name}
         </p>
         <span className="splash-rule mt-3 h-px w-14 bg-brass-light/70" style={d(880)} />
-        <p className="splash-text mt-3 text-sm tracking-wide text-[#bccac3]" style={d(940)}>
+        <p className="splash-text mt-3 text-sm text-muted-foreground" style={d(940)}>
           {role}
         </p>
-        <span className="sr-only">{siteConfig.monogram}</span>
       </div>
     </div>
   );

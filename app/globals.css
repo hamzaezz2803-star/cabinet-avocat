@@ -240,6 +240,101 @@ html[lang="ar"] {
   }
 }
 
+/*
+ * Écran d'accueil (balance de la Justice), ~1,9 s au premier chargement de la session.
+ * --splash-delay décale l'entrée du héros pour qu'elle se joue après l'écran.
+ */
+:root {
+  --splash-delay: 1500ms;
+}
+html.splash-seen {
+  --splash-delay: 0ms;
+}
+
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background-color: var(--background);
+  pointer-events: none;
+  animation: splash-out 0.45s cubic-bezier(0.4, 0, 0.2, 1) 1.45s forwards;
+}
+html.splash-seen .splash {
+  display: none;
+}
+
+.splash-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: splash-draw 0.75s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+.splash-beam {
+  transform-box: view-box;
+  transform-origin: 60px 31px;
+  animation: splash-balance 1.1s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.45s both;
+}
+.splash-text {
+  opacity: 0;
+  animation: splash-text 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.splash-rule {
+  transform: scaleX(0);
+  animation: splash-rule 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes splash-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes splash-balance {
+  0% {
+    rotate: -8deg;
+  }
+  35% {
+    rotate: 5deg;
+  }
+  65% {
+    rotate: -2deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+@keyframes splash-text {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes splash-rule {
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes splash-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Mouvement réduit : pas d'écran d'accueil, le contenu s'affiche directement. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --splash-delay: 0ms;
+  }
+  .splash {
+    display: none;
+  }
+}
+
 /* Galerie Skiper49 (Swiper) */
 .skiper49-swiper {
   width: 100%;
